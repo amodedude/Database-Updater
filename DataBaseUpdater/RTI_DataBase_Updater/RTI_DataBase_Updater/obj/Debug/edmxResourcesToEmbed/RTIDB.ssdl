@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="rtitestModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cond_archive">
+    <Key>
+      <PropertyRef Name="dataID" />
+    </Key>
+    <Property Name="dataID" Type="int" Nullable="false" />
+    <Property Name="cond" Type="int" />
+    <Property Name="temp" Type="int" />
+    <Property Name="measurment_date" Type="varchar" MaxLength="45" />
+    <Property Name="sourceID" Type="int" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="45" />
+    <Property Name="company" Type="varchar" MaxLength="45" />
+    <Property Name="plant" Type="varchar" MaxLength="45" />
+    <Property Name="city" Type="varchar" MaxLength="45" />
+    <Property Name="state" Type="varchar" MaxLength="45" />
+    <Property Name="acid_price" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="caustic_price" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="demand" Type="int" />
+    <Property Name="num_trains" Type="uint" />
+    <Property Name="date_added" Type="varchar" MaxLength="45" />
+    <Property Name="notes" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="customer_water">
+    <Key>
+      <PropertyRef Name="customer_customerID" />
+      <PropertyRef Name="first_sourceID" />
+      <PropertyRef Name="second_sourceID" />
+    </Key>
+    <Property Name="customer_customerID" Type="uint" Nullable="false" />
+    <Property Name="first_sourceID" Type="int" Nullable="false" />
+    <Property Name="second_sourceID" Type="int" Nullable="false" />
+    <Property Name="firstSourcePercentage" Type="int" />
+  </EntityType>
+  <EntityType Name="resin_products">
+    <Key>
+      <PropertyRef Name="resin_product_id" />
+    </Key>
+    <Property Name="resin_product_id" Type="int" Nullable="false" />
+    <Property Name="manufacturer" Type="varchar" MaxLength="45" />
+    <Property Name="name" Type="varchar" MaxLength="45" />
+    <Property Name="model_number" Type="varchar" MaxLength="45" />
+    <Property Name="resin_type" Type="varchar" MaxLength="45" />
+    <Property Name="primary_type" Type="varchar" MaxLength="45" />
+    <Property Name="group" Type="varchar" MaxLength="45" />
+    <Property Name="teir" Type="varchar" MaxLength="45" />
+    <Property Name="chemical_structure" Type="varchar" MaxLength="45" />
+    <Property Name="physical_structure" Type="varchar" MaxLength="45" />
+    <Property Name="color" Type="varchar" MaxLength="45" />
+    <Property Name="total_capacity" Type="varchar" MaxLength="45" />
+    <Property Name="salt_split_CAP" Type="varchar" MaxLength="45" />
+    <Property Name="price_per_cuft" Type="varchar" MaxLength="45" />
+    <Property Name="comments" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="sources">
+    <Key>
+      <PropertyRef Name="sources_sourceID" />
+    </Key>
+    <Property Name="sources_sourceID" Type="int" Nullable="false" />
+    <Property Name="river" Type="varchar" MaxLength="128" />
+    <Property Name="city" Type="varchar" MaxLength="255" />
+    <Property Name="state" Type="varchar" MaxLength="5" />
+    <Property Name="country" Type="varchar" MaxLength="45" />
+    <Property Name="region" Type="varchar" MaxLength="45" />
+    <Property Name="measurement_location" Type="varchar" MaxLength="255" />
+    <Property Name="exact_lat" Type="varchar" MaxLength="255" />
+    <Property Name="exact_lng" Type="varchar" MaxLength="255" />
+    <Property Name="street_number" Type="varchar" MaxLength="255" />
+    <Property Name="street_name" Type="varchar" MaxLength="255" />
+    <Property Name="street_lat" Type="varchar" MaxLength="255" />
+    <Property Name="street_lng" Type="varchar" MaxLength="255" />
+    <Property Name="feature_class" Type="varchar" MaxLength="255" />
+    <Property Name="miles_from_site" Type="varchar" MaxLength="255" />
+    <Property Name="post_code" Type="varchar" MaxLength="15" />
+    <Property Name="place_name" Type="varchar" MaxLength="255" />
+    <Property Name="county_number" Type="varchar" MaxLength="255" />
+    <Property Name="county_name" Type="varchar" MaxLength="255" />
+    <Property Name="state_name" Type="varchar" MaxLength="255" />
+    <Property Name="agency" Type="varchar" MaxLength="255" />
+    <Property Name="agency_id" Type="varchar" MaxLength="255" />
+    <Property Name="full_site_name" Type="varchar" MaxLength="255" />
+    <Property Name="unique_site_name" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="train">
+    <Key>
+      <PropertyRef Name="trainID" />
+      <PropertyRef Name="customer_customerID" />
+    </Key>
+    <Property Name="trainID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="45" />
+    <Property Name="number" Type="int" />
+    <Property Name="gpm" Type="varchar" MaxLength="45" />
+    <Property Name="num_beds_cation" Type="int" />
+    <Property Name="num_beds_anion" Type="int" />
+    <Property Name="using_manifold" Type="varchar" MaxLength="45" />
+    <Property Name="regens_per_month" Type="varchar" MaxLength="45" />
+    <Property Name="regen_duration" Type="varchar" MaxLength="45" />
+    <Property Name="has_mixed_bed" Type="varchar" MaxLength="45" />
+    <Property Name="has_historical_data" Type="varchar" MaxLength="45" />
+    <Property Name="customer_customerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vessel">
+    <Key>
+      <PropertyRef Name="vesselID" />
+      <PropertyRef Name="train_trainID" />
+      <PropertyRef Name="resin_data_product_id" />
+    </Key>
+    <Property Name="vesselID" Type="int" Nullable="false" />
+    <Property Name="vessel_number" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="120" />
+    <Property Name="size" Type="varchar" MaxLength="45" />
+    <Property Name="bed_number" Type="varchar" MaxLength="45" />
+    <Property Name="lbs_chemical" Type="varchar" MaxLength="45" />
+    <Property Name="date_replaced" Type="varchar" MaxLength="45" />
+    <Property Name="replacement_plan" Type="varchar" MaxLength="45" />
+    <Property Name="throughput" Type="varchar" MaxLength="45" />
+    <Property Name="num_regens" Type="varchar" MaxLength="45" />
+    <Property Name="toc" Type="varchar" MaxLength="45" />
+    <Property Name="with_degassifier" Type="varchar" MaxLength="45" />
+    <Property Name="with_polisher" Type="varchar" MaxLength="45" />
+    <Property Name="vessel_customerID" Type="varchar" MaxLength="45" />
+    <Property Name="train_trainID" Type="int" Nullable="false" />
+    <Property Name="resin_data_product_id" Type="int" Nullable="false" />
+    <Property Name="Salt_Split" Type="double" />
+    <Property Name="price_cuft_resin" Type="double" />
+  </EntityType>
+  <EntityType Name="vessel_historical">
+    <Key>
+      <PropertyRef Name="sampleID" />
+    </Key>
+    <Property Name="sampleID" Type="int" Nullable="false" />
+    <Property Name="date" Type="varchar" MaxLength="45" />
+    <Property Name="lbs_chemical" Type="int" />
+    <Property Name="throughput" Type="varchar" MaxLength="45" />
+    <Property Name="num_regens" Type="varchar" MaxLength="45" />
+    <Property Name="toc" Type="varchar" MaxLength="45" />
+    <Property Name="vessel_historical_customerID" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="water_data">
+    <Key>
+      <PropertyRef Name="dataID" />
+    </Key>
+    <Property Name="dataID" Type="int" Nullable="false" />
+    <Property Name="cond" Type="int" />
+    <Property Name="temp" Type="int" />
+    <Property Name="measurment_date" Type="varchar" MaxLength="45" />
+    <Property Name="sourceID" Type="int" />
+  </EntityType>
+  <Association Name="fk_customer_water_customer1">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="customer_water">
+        <PropertyRef Name="customer_customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_customer_water_sources1">
+    <End Role="sources" Type="Self.sources" Multiplicity="1" />
+    <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sources">
+        <PropertyRef Name="sources_sourceID" />
+      </Principal>
+      <Dependent Role="customer_water">
+        <PropertyRef Name="first_sourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_customer_water_sources2">
+    <End Role="sources" Type="Self.sources" Multiplicity="1" />
+    <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sources">
+        <PropertyRef Name="sources_sourceID" />
+      </Principal>
+      <Dependent Role="customer_water">
+        <PropertyRef Name="second_sourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_vessel_resin_products1">
+    <End Role="resin_products" Type="Self.resin_products" Multiplicity="1" />
+    <End Role="vessel" Type="Self.vessel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="resin_products">
+        <PropertyRef Name="resin_product_id" />
+      </Principal>
+      <Dependent Role="vessel">
+        <PropertyRef Name="resin_data_product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'fk_vessel_train1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="fk_vessel_train1" />-->
+  <EntityContainer Name="rtitestModelStoreContainer">
+    <EntitySet Name="cond_archive" EntityType="Self.cond_archive" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="customer_water" EntityType="Self.customer_water" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="resin_products" EntityType="Self.resin_products" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="sources" EntityType="Self.sources" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="train" EntityType="Self.train" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="vessel" EntityType="Self.vessel" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="vessel_historical" EntityType="Self.vessel_historical" Schema="rtitest" store:Type="Tables" />
+    <EntitySet Name="water_data" EntityType="Self.water_data" Schema="rtitest" store:Type="Tables" />
+    <AssociationSet Name="fk_customer_water_customer1" Association="Self.fk_customer_water_customer1">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="customer_water" EntitySet="customer_water" />
+    </AssociationSet>
+    <AssociationSet Name="fk_customer_water_sources1" Association="Self.fk_customer_water_sources1">
+      <End Role="sources" EntitySet="sources" />
+      <End Role="customer_water" EntitySet="customer_water" />
+    </AssociationSet>
+    <AssociationSet Name="fk_customer_water_sources2" Association="Self.fk_customer_water_sources2">
+      <End Role="sources" EntitySet="sources" />
+      <End Role="customer_water" EntitySet="customer_water" />
+    </AssociationSet>
+    <AssociationSet Name="fk_vessel_resin_products1" Association="Self.fk_vessel_resin_products1">
+      <End Role="resin_products" EntitySet="resin_products" />
+      <End Role="vessel" EntitySet="vessel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
