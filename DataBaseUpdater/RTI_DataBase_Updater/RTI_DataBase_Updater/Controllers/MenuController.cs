@@ -55,49 +55,22 @@ namespace RTI_DataBase_Updater.Controllers
         // Runs the AutoUpdater application 
         public static void runNewUpdater()
         {
-            FileFetcher Fetcher = new FileFetcher();
-            while (true)
-            {
-                for (int step = 0; step <= int.MaxValue; step++)
-                {
-                    if (!breakCurrentOperation()) // Checks if the user has halted the current opperation by pressing ESC
-                    {
-                        
-                        UserInterfaceController.WriteToConsole("\nDownloaded " + step.ToString() + " file(s) out of " + int.MaxValue.ToString());
-                        
-                        // Generate a USGS ID
-                        Random rnd = new Random();
-                        long USGSID = rnd.Next();
-                        
-                        // Fetch the file
-                        Fetcher.download_file(USGSID);
-                        
-                        // Catch Overflow Exception 
-                        if (step == int.MaxValue)
-                        {
-                            step = 0; // Re-set the loop counter
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
+
+            FileFetcher fetcherProcess = new FileFetcher();
+            Thread fetcherThread = new Thread(() => fetcherProcess.fetchFile());
+            fetcherThread.Start(); // Start the Worker Thread
+            while (!fetcherThread.IsAlive); // Wait for the thread to become active
+
+            while (!breakCurrentOperation(fetcherProcess)) ; // Continuously check to see if the user has pressed ESC to cancle
 
 
-                if (!startNewOperation())
-                {
-                    // Noop
-                }
-                else
-                {
-                    break;
-                }
+            fetcherProcess.Stop();
+            UserInterfaceController.WriteToConsole("Operation Cancled...");         
 
-            }
+            
 
-            UserInterfaceController.WriteToConsole("\nAre you ready to run the RTI database updater again? y/n");
-            startApplication(UserInterfaceController.ReadFromConsole());
+           UserInterfaceController.WriteToConsole("\nAre you ready to run the RTI database updater again? y/n");
+           startApplication(UserInterfaceController.ReadFromConsole());
         }
 
         public static bool startNewOperation()
@@ -120,17 +93,19 @@ namespace RTI_DataBase_Updater.Controllers
             }
         }
 
-        public static bool breakCurrentOperation()
+        public static bool breakCurrentOperation(FileFetcher fetcherProcess)
         {
             if (Console.KeyAvailable)
             {
                 var consoleKey = Console.ReadKey(true);
                 if (consoleKey.Key == ConsoleKey.Escape)
                 {
+                    fetcherProcess.Pause(); // Pause
                     UserInterfaceController.WriteToConsole("Do you want to stop the current process? \nType s to stop or c to continue.");
                     string input = Console.ReadLine();
                     if (input == "c" || input == "C")
                     {
+                        fetcherProcess.Pause(); // Unpause
                         return false; // Continue 
                     }
                     else if (input == "s" || input == "S")
@@ -140,6 +115,7 @@ namespace RTI_DataBase_Updater.Controllers
                     else
                     {
                         UserInterfaceController.WriteToConsole("Error: Input was not recognized, the current process will now continue. Press Esc to stop the operation.");
+                        fetcherProcess.Pause(); // Unpause
                     }
                 }
             }
