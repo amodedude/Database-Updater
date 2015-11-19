@@ -10,10 +10,11 @@ namespace RTI_DataBase_Updater
 {
     class FileFetcher
     {
-
+        bool paused = false;
         bool stop = false;
-        bool pause = false;
+        private ManualResetEvent _pause = new ManualResetEvent(false);
 
+        // Begins the File Download
         public void fetchFile()
         {
             try
@@ -22,10 +23,11 @@ namespace RTI_DataBase_Updater
                 {
                     for (int step = 0; step <= int.MaxValue; step++)
                     {
-                        while (pause);
-                        if (!stop) // !breakCurrentOperation() Checks if the user has halted the current opperation by pressing ESC
-                        {
 
+                        _pause.WaitOne(Timeout.Infinite); // Pause File Download Process
+
+                        if (!stop)
+                        {
                             UserInterfaceController.WriteToConsole("\nDownloaded " + step.ToString() + " file(s) out of " + int.MaxValue.ToString());
 
                             // Generate a USGS ID
@@ -45,38 +47,48 @@ namespace RTI_DataBase_Updater
                         {
                             break;
                         }
-                    }
 
-                    if (stop)//startNewOperation()
-                    {
-                        break;
                     }
                 }
             }
-            finally
+            catch
             {
-                // Close the file
+                // Catch Stuff
             }
         }
+            
+
+        
 
         private void download_file(long USGSID)
         {
             UserInterfaceController.WriteToConsole("Downloading File  " + Convert.ToString(USGSID) + "...");
-            Thread.Sleep(3000);
+            Thread.Sleep(3000); // Simulate the download process
             UserInterfaceController.WriteToConsole("File download complete! \n");
         }
 
+        // Triggers the START event 
+        public void Start()
+        {
+            _pause.Set();
+            paused = false;
+        }
+
+        // Triggers the STOP event 
         public void Stop()
         {
             stop = true;
         }
 
+        // Toggles the Pause event 
         public void Pause()
         {
-            if (!pause)
-                pause = true;
+            if (!paused)
+                _pause.Reset(); // Pause
             else
-                pause = false;
+                _pause.Set();     // Un-Pause
+
+            paused = !paused; // Toggle Pause State
         }
     }
 }

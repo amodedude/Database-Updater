@@ -21,7 +21,7 @@ namespace RTI_DataBase_Updater.Controllers
             {
                 Console.WriteLine("Initializing RTI updater...");
                 Console.WriteLine("Press the 'Esc' key at any time to exit.");
-                runNewUpdater();
+                runNewUpdater(); // Start the updater 
             }
             else // Case Error
             {
@@ -36,12 +36,12 @@ namespace RTI_DataBase_Updater.Controllers
         {
             if (exit == "y" || exit == "Y") // Case Yes
             {
-                UserInterfaceController.WriteToConsole("Goodbye...!");
+                UserInterfaceController.WriteToConsole("Goodbye.");
                 System.Environment.Exit(0);
             }
             else if (exit == "n" || exit == "N") // Case No 
             {
-                UserInterfaceController.WriteToConsole("Okay, would you like to run the RTI database updater? y/n");
+                UserInterfaceController.WriteToConsole("Would you like to run the RTI database updater? y/n");
                 startApplication(UserInterfaceController.ReadFromConsole());
             }
             else // Case Error
@@ -55,49 +55,39 @@ namespace RTI_DataBase_Updater.Controllers
         // Runs the AutoUpdater application 
         public static void runNewUpdater()
         {
-
-            FileFetcher fetcherProcess = new FileFetcher();
-            Thread fetcherThread = new Thread(() => fetcherProcess.fetchFile());
-            fetcherThread.Start(); // Start the Worker Thread
-            while (!fetcherThread.IsAlive); // Wait for the thread to become active
-
-            while (!breakCurrentOperation(fetcherProcess)) ; // Continuously check to see if the user has pressed ESC to cancle
-
-
-            fetcherProcess.Stop();
-            UserInterfaceController.WriteToConsole("Operation Cancled...");         
-
-            
-
-           UserInterfaceController.WriteToConsole("\nAre you ready to run the RTI database updater again? y/n");
-           startApplication(UserInterfaceController.ReadFromConsole());
-        }
-
-        public static bool startNewOperation()
-        {
-            UserInterfaceController.WriteToConsole("Do you want go back to the main menu or start a new update process?  \nType y to start a new update process or n to go to the main menu.");
-            string input = UserInterfaceController.ReadFromConsole();
-
-            if (input == "y" || input == "Y")
+            try
             {
-                return false;
+                FileFetcher fetcherProcess = new FileFetcher();
+                Thread fetcherThread = new Thread(() => fetcherProcess.fetchFile());
+                fetcherThread.Start(); // Start the File Fetcher Thread
+                fetcherProcess.Start();
+                while (!fetcherThread.IsAlive) ; // Hault untill Thread becomes Active 
+
+                // Check for User Process Cancelation 
+                while (!breakCurrentOperation(fetcherProcess));
+
+                // Cancle the Process
+                fetcherProcess.Stop();
+
+                // Notify the User
+                UserInterfaceController.WriteToConsole("Operation Cancled...");
+
+
+                // Ask to Re-Start the applicatoin 
+                UserInterfaceController.WriteToConsole("\nWould you like to re-start the RTI database updater? y/n");
+                startApplication(UserInterfaceController.ReadFromConsole());
             }
-            else if (input == "n" || input == "N")
+            catch(Exception error)
             {
-                return true; // Noop - Restart the Loop from the begining
-            }
-            else
-            {
-                UserInterfaceController.WriteToConsole("Error: Input was not recognized. ");
-                return startNewOperation(); // Recursivly call method untill user enters a logical input
+                UserInterfaceController.WriteToConsole("The updater application has encountered a fatal error.\nPlease view the log file for more details." );
             }
         }
 
+        // Pauses the FileFetcher thread
         public static bool breakCurrentOperation(FileFetcher fetcherProcess)
         {
-            if (Console.KeyAvailable)
-            {
-                var consoleKey = Console.ReadKey(true);
+            var consoleKey = Console.ReadKey(true);
+
                 if (consoleKey.Key == ConsoleKey.Escape)
                 {
                     fetcherProcess.Pause(); // Pause
@@ -118,9 +108,8 @@ namespace RTI_DataBase_Updater.Controllers
                         fetcherProcess.Pause(); // Unpause
                     }
                 }
-            }
             return false;
         }
-
     }
 }
+
