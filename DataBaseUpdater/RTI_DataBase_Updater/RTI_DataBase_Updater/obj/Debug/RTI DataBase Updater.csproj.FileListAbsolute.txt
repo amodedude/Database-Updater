@@ -1,0 +1,11 @@
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\RTI.Database.Updater.dll.exe.config
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\RTI.Database.Updater.dll.exe
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\RTI.Database.Updater.dll.pdb
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\EntityFramework.dll
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\EntityFramework.xml
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI DataBase Updater.csprojResolveAssemblyReference.cache
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI.Database.Updater.dll.exe
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI.Database.Updater.dll.pdb

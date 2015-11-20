@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTI_DataBase_Updater", "RTI_DataBase_Updater\RTI_DataBase_Updater.csproj", "{25778883-EE99-4ED1-AC36-AE8BBF491158}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTI Database Updater", "RTI_DataBase_Updater\RTI Database Updater.csproj", "{25778883-EE99-4ED1-AC36-AE8BBF491158}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

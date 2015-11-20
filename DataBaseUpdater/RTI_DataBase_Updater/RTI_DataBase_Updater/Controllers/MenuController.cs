@@ -5,29 +5,29 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RTI_DataBase_Updater.Controllers
+namespace RTI.DataBase.Application.Controllers
 {
     class MenuController
     {
         // Asks the user if they want to start running the AutoUpdater
         public static void startApplication(string start)
         {
+            Console.Clear();
             if (start == "n" || start == "N") // Case No
             {
-                UserInterfaceController.WriteToConsole("Do you want to exit?  y/n");
-                exitApplication(UserInterfaceController.ReadFromConsole());
+                UserInterface.WriteToConsole("Do you want to exit?  y/n");
+                exitApplication(UserInterface.ReadFromConsole());
             }
             else if (start == "y" || start == "Y") // Case Yes
             {
-                Console.WriteLine("Initializing RTI updater...");
-                Console.WriteLine("Press the 'Esc' key at any time to exit.");
+                UserInterface.WriteToConsole("\n\nPress the 'Esc' key at any time to exit.");
                 runNewUpdater(); // Start the updater 
             }
             else // Case Error
             {
-                UserInterfaceController.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
-                UserInterfaceController.WriteToConsole("\nWould you like to run the RTI database updater? y/n");
-                startApplication(UserInterfaceController.ReadFromConsole());
+                UserInterface.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
+                UserInterface.WriteToConsole("\nWould you like to run the RTI database updater? y/n");
+                startApplication(UserInterface.ReadFromConsole());
             }
         }
 
@@ -36,19 +36,19 @@ namespace RTI_DataBase_Updater.Controllers
         {
             if (exit == "y" || exit == "Y") // Case Yes
             {
-                UserInterfaceController.WriteToConsole("Goodbye.");
+                UserInterface.WriteToConsole("Goodbye.");
                 System.Environment.Exit(0);
             }
             else if (exit == "n" || exit == "N") // Case No 
             {
-                UserInterfaceController.WriteToConsole("Would you like to run the RTI database updater? y/n");
-                startApplication(UserInterfaceController.ReadFromConsole());
+                UserInterface.WriteToConsole("Would you like to run the RTI database updater? y/n");
+                startApplication(UserInterface.ReadFromConsole());
             }
             else // Case Error
             {
-                UserInterfaceController.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
-                UserInterfaceController.WriteToConsole("\nDo you want to exit?  y/n");
-                exitApplication(UserInterfaceController.ReadFromConsole()); // Recursive call to exit
+                UserInterface.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
+                UserInterface.WriteToConsole("\nDo you want to exit?  y/n");
+                exitApplication(UserInterface.ReadFromConsole()); // Recursive call to exit
             }
         }
 
@@ -70,16 +70,16 @@ namespace RTI_DataBase_Updater.Controllers
                 fetcherProcess.Stop();
 
                 // Notify the User
-                UserInterfaceController.WriteToConsole("Operation Cancled...");
+                UserInterface.WriteToConsole("Operation Cancled...");
 
 
                 // Ask to Re-Start the applicatoin 
-                UserInterfaceController.WriteToConsole("\nWould you like to re-start the RTI database updater? y/n");
-                startApplication(UserInterfaceController.ReadFromConsole());
+                UserInterface.WriteToConsole("\nWould you like to re-start the RTI database updater? y/n");
+                startApplication(UserInterface.ReadFromConsole());
             }
             catch(Exception error)
             {
-                UserInterfaceController.WriteToConsole("The updater application has encountered a fatal error.\nPlease view the log file for more details." );
+                UserInterface.WriteToConsole("The updater application has encountered a fatal error.\nPlease view the log file for more details." );
             }
         }
 
@@ -91,7 +91,7 @@ namespace RTI_DataBase_Updater.Controllers
                 if (consoleKey.Key == ConsoleKey.Escape)
                 {
                     fetcherProcess.Pause(); // Pause
-                    UserInterfaceController.WriteToConsole("Do you want to stop the current process? \nType s to stop or c to continue.");
+                    UserInterface.WriteToConsole("Do you want to stop the current process? \nType s to stop or c to continue.");
                     string input = Console.ReadLine();
                     if (input == "c" || input == "C")
                     {
@@ -104,7 +104,7 @@ namespace RTI_DataBase_Updater.Controllers
                     }
                     else
                     {
-                        UserInterfaceController.WriteToConsole("Error: Input was not recognized, the current process will now continue. Press Esc to stop the operation.");
+                        UserInterface.WriteToConsole("Error: Input was not recognized, the current process will now continue. Press Esc to stop the operation.");
                         fetcherProcess.Pause(); // Unpause
                     }
                 }

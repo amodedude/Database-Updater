@@ -4,17 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RTI_DataBase_Updater.Controllers;
+using RTI.DataBase.Application.Controllers;
 
-namespace RTI_DataBase_Updater
+namespace RTI.DataBase.Application
 {
+    /// <summary>
+    /// Handles downloading of USGS text files to the file repository.
+    /// </summary>
     class FileFetcher
     {
         bool paused = false;
         bool stop = false;
         private ManualResetEvent _pause = new ManualResetEvent(false);
 
-        // Begins the File Download
+        /// <summary>
+        /// Creates an new thread to download 
+        /// USGS text files asynchronously. 
+        /// </summary>
         public void fetchFile()
         {
             try
@@ -28,7 +34,7 @@ namespace RTI_DataBase_Updater
 
                         if (!stop)
                         {
-                            UserInterfaceController.WriteToConsole("\nDownloaded " + step.ToString() + " file(s) out of " + int.MaxValue.ToString());
+                            UserInterface.WriteToConsole("\nDownloaded " + step.ToString() + " file(s) out of " + int.MaxValue.ToString());
 
                             // Generate a USGS ID
                             Random rnd = new Random();
@@ -58,13 +64,16 @@ namespace RTI_DataBase_Updater
         }
             
 
-        
-
+        /// <summary>
+        /// Downloads the USGS text files 
+        /// contaning conductivity information. 
+        /// </summary>
+        /// <param name="USGSID"></param>
         private void download_file(long USGSID)
         {
-            UserInterfaceController.WriteToConsole("Downloading File  " + Convert.ToString(USGSID) + "...");
+            UserInterface.WriteToConsole("Downloading File  " + Convert.ToString(USGSID) + "...");
             Thread.Sleep(3000); // Simulate the download process
-            UserInterfaceController.WriteToConsole("File download complete! \n");
+            UserInterface.WriteToConsole("File download complete! \n");
         }
 
         // Triggers the START event 
