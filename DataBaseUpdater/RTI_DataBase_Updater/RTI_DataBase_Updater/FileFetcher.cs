@@ -9,14 +9,14 @@ using RTI.DataBase.Application.Controllers;
 namespace RTI.DataBase.Application
 {
     /// <summary>
-    /// Handles downloading of USGS text files to the file repository.
+    /// Handles downloading of USGS text files into the file repository.
     /// </summary>
     class FileFetcher
     {
         bool paused = false;
-        bool stop = false;
+        bool _stop = false;
         private ManualResetEvent _pause = new ManualResetEvent(false);
-
+     
         /// <summary>
         /// Creates an new thread to download 
         /// USGS text files asynchronously. 
@@ -32,9 +32,14 @@ namespace RTI.DataBase.Application
 
                         _pause.WaitOne(Timeout.Infinite); // Pause File Download Process
 
-                        if (!stop)
+                        if (!_stop)
                         {
-                            UserInterface.WriteToConsole("\nDownloaded " + step.ToString() + " file(s) out of " + int.MaxValue.ToString());
+                            Console.Clear();
+                            double percentage = (step / int.MaxValue) * 100;
+                            Console.WriteLine(
+                                "Progress:                                                      {0}%" +
+                                "\n--------------------------------------------------------------------" +
+                                "\nDownloaded " + step.ToString() + " file(s) out of " + int.MaxValue.ToString(), step);
 
                             // Generate a USGS ID
                             Random rnd = new Random();
@@ -71,26 +76,35 @@ namespace RTI.DataBase.Application
         /// <param name="USGSID"></param>
         private void download_file(long USGSID)
         {
-            UserInterface.WriteToConsole("Downloading File  " + Convert.ToString(USGSID) + "...");
-            Thread.Sleep(3000); // Simulate the download process
-            UserInterface.WriteToConsole("File download complete! \n");
+            UserInterface.WriteToConsole("Downloading File with USGSID =  " + Convert.ToString(USGSID));
+            Thread.Sleep(500); // Simulate the download process
         }
 
-        // Triggers the START event 
-        public void Start()
+        /// <summary>
+        /// Resumes the asynchronous FileFetcher 
+        /// download thread.  
+        /// </summary>
+        public void start()
         {
             _pause.Set();
             paused = false;
         }
 
-        // Triggers the STOP event 
-        public void Stop()
+        /// <summary>
+        /// Stops the asynchronous FileFetcher 
+        /// download thread.  
+        /// </summary>
+        public void stop()
         {
-            stop = true;
+            _stop = true;
         }
 
-        // Toggles the Pause event 
-        public void Pause()
+        /// <summary>
+        /// Either pauses or unpauses the 
+        /// asynchonous FileFetcher download 
+        /// thread based on the current state. 
+        /// </summary>
+        public void pause()
         {
             if (!paused)
                 _pause.Reset(); // Pause
@@ -99,5 +113,18 @@ namespace RTI.DataBase.Application
 
             paused = !paused; // Toggle Pause State
         }
+
+        /// <summary>
+        /// Returns the current state of the 
+        /// asynchronous FileFetcher download 
+        /// thred. 
+        /// </summary>
+        /// <returns></returns>
+        public bool isPaused()
+        {
+            return paused;
+        }
+
+
     }
 }

@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace RTI.DataBase.Application.Controllers
 {
+    /// <summary>
+    /// Custom read/write to console.
+    /// utility class 
+    /// </summary>
     class UserInterface
     {
-        // Writes to the console
+        /// <summary>
+        /// Writes to the console.
+        /// </summary>
+        /// <param name="message"></param>
         public static void WriteToConsole(string message = "")
         {
             if (message.Length > 0)
@@ -17,7 +24,10 @@ namespace RTI.DataBase.Application.Controllers
             }
         }
 
-        // Reads a user input from the console
+        /// <summary>
+        /// Reads user input from console. 
+        /// </summary>
+        /// <returns></returns>
         public static string ReadFromConsole()
         {
             string input = Console.ReadLine();

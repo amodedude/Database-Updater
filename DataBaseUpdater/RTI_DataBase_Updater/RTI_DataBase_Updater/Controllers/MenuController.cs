@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace RTI.DataBase.Application.Controllers
 {
+    /// <summary>
+    /// Provides menu functionality.
+    /// </summary>
     class MenuController
     {
         // Asks the user if they want to start running the AutoUpdater
@@ -36,7 +39,8 @@ namespace RTI.DataBase.Application.Controllers
         {
             if (exit == "y" || exit == "Y") // Case Yes
             {
-                UserInterface.WriteToConsole("Goodbye.");
+                UserInterface.WriteToConsole("\nGoodbye!");
+                Thread.Sleep(50); //Pause for 50ms before closing 
                 System.Environment.Exit(0);
             }
             else if (exit == "n" || exit == "N") // Case No 
@@ -60,14 +64,14 @@ namespace RTI.DataBase.Application.Controllers
                 FileFetcher fetcherProcess = new FileFetcher();
                 Thread fetcherThread = new Thread(() => fetcherProcess.fetchFile());
                 fetcherThread.Start(); // Start the File Fetcher Thread
-                fetcherProcess.Start();
+                fetcherProcess.start();
                 while (!fetcherThread.IsAlive) ; // Hault untill Thread becomes Active 
 
                 // Check for User Process Cancelation 
                 while (!breakCurrentOperation(fetcherProcess));
 
                 // Cancle the Process
-                fetcherProcess.Stop();
+                fetcherProcess.stop();
 
                 // Notify the User
                 UserInterface.WriteToConsole("Operation Cancled...");
@@ -90,12 +94,12 @@ namespace RTI.DataBase.Application.Controllers
 
                 if (consoleKey.Key == ConsoleKey.Escape)
                 {
-                    fetcherProcess.Pause(); // Pause
-                    UserInterface.WriteToConsole("Do you want to stop the current process? \nType s to stop or c to continue.");
+                    fetcherProcess.pause(); // Pause
+                    UserInterface.WriteToConsole("\n\nDo you want to stop the current process? \nType s to stop or c to continue.");
                     string input = Console.ReadLine();
                     if (input == "c" || input == "C")
                     {
-                        fetcherProcess.Pause(); // Unpause
+                        fetcherProcess.pause(); // Unpause
                         return false; // Continue 
                     }
                     else if (input == "s" || input == "S")
@@ -105,7 +109,7 @@ namespace RTI.DataBase.Application.Controllers
                     else
                     {
                         UserInterface.WriteToConsole("Error: Input was not recognized, the current process will now continue. Press Esc to stop the operation.");
-                        fetcherProcess.Pause(); // Unpause
+                        fetcherProcess.pause(); // Unpause
                     }
                 }
             return false;

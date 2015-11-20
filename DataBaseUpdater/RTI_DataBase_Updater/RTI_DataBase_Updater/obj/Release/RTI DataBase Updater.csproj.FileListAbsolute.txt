@@ -8,3 +8,4 @@ C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_
 C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Release\RTI.Database.Updater.dll.exe
 C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Release\RTI.Database.Updater.dll.pdb
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Release\RTI DataBase Updater.csprojResolveAssemblyReference.cache
