@@ -15,7 +15,7 @@ namespace RTI.DataBase.Application
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            SetUpWindow(ConsoleColor.Green, 1, .30);
+            //SetUpWindow(ConsoleColor.Green, 1, 1);
             string welcomeMessage =
              "\n ---------------------------------------------------------------------\n"
               +   "              Recirculation Technologies, LLC 2015"
@@ -27,9 +27,11 @@ namespace RTI.DataBase.Application
               + " taken from the USGS website.";
 
             UserInterface.WriteToConsole(welcomeMessage);
-            SetUpWindow(ConsoleColor.White, 1, .30);
+            //SetUpWindow(ConsoleColor.White, 1, 1);
+
             UserInterface.WriteToConsole("\nAre you ready to run the RTI database updater? y/n");
-            MenuController.startApplication(UserInterface.ReadFromConsole());
+            MenuController start = new MenuController();
+            start.startApplication(UserInterface.ReadFromConsole());
         }
 
         /// <summary>

@@ -208,7 +208,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="rtitestEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="RTIDBContext" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="cond_archive" EntityType="Self.cond_archive" />
     <EntitySet Name="customers" EntityType="Self.customer" />
     <EntitySet Name="customer_water" EntityType="Self.customer_water" />

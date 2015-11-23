@@ -84,14 +84,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RTI.Database.Updater.dll.exe" size="93184">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RTI.Database.Updater.dll.exe" size="99840">
       <assemblyIdentity name="RTI.Database.Updater.dll" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dwJdwoP2dWi6VyJoLFd7gtDv9jV+AUVv8Hum4qPOaVg=</dsig:DigestValue>
+        <dsig:DigestValue>FCf8Wa7e6+s+oruTghpNDzc31/972mhuMDZj3B0X7yU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -104,13 +104,13 @@
       <dsig:DigestValue>TcAtTupvzU6ROgstk5g9OC2Yar2q5gI9GqriUdMwi38=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="RTI.Database.Updater.dll.exe.config" size="1962">
+  <file name="RTI.Database.Updater.dll.exe.config" size="1961">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>J2RiNLuZDLHtM6MpA9sOHRbQOZbDuW5grXAXm8bTnvQ=</dsig:DigestValue>
+      <dsig:DigestValue>I6iM3/g7jXypLR1fXXdOQUJxqErGu5u92lvpiQOvLjI=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RTI_DataBase_Updater
+namespace RTI.Database.Updater
 {
     using System;
     using System.Collections.Generic;

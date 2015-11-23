@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5889a20f943b450aba7b7f4e6544dbb5" Name="Diagram1">
-        <EntityTypeShape EntityType="rtitestModel.cond_archive" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.customer" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.customer_water" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.resin_products" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.source" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.train" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.vessel" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.vessel_historical" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="rtitestModel.water_data" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+      <Diagram DiagramId="5889a20f943b450aba7b7f4e6544dbb5" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="rtitestModel.cond_archive" Width="1.5" PointX="11.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.customer" Width="1.5" PointX="4.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.customer_water" Width="1.875" PointX="4" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.resin_products" Width="1.5" PointX="6.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.source" Width="2.25" PointX="0.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.train" Width="1.5" PointX="10.875" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.vessel" Width="1.5" PointX="9.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.vessel_historical" Width="1.5" PointX="13" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="rtitestModel.water_data" Width="1.5" PointX="1" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="rtitestModel.fk_customer_water_customer1" ManuallyRouted="false" />
         <AssociationConnector Association="rtitestModel.fk_customer_water_sources1" ManuallyRouted="false" />
         <AssociationConnector Association="rtitestModel.fk_customer_water_sources2" ManuallyRouted="false" />
