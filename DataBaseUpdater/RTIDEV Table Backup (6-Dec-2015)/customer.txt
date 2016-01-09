@@ -1,0 +1,9 @@
+customerID,name,company,plant,city,state,acid_price,caustic_price,demand,num_trains,date_added,notes
+1,"Demo Company A",NULL,"Demo Plant A","Warren County",Mississippi,0.10,0.30,38000000,3,NULL,NULL
+2,"Demo Company B",NULL,"Demo Plant B","Warren County",Mississippi,0.10,0.30,15000000,1,NULL,NULL
+3,"Demo Company C",NULL,"Demo Plant C","Warren County",Mississippi,0.10,0.30,38000000,3,NULL,NULL
+4,"Demo Company D",NULL,"Demo Plant D","Warren County",Mississippi,0.10,0.30,38000000,3,NULL,NULL
+17,"Demo Company E",NULL,"Demo Plant E","Warren County",Mississippi,0.15,0.35,38000000,4,NULL,NULL
+18,"WebSite Live Test",NULL,Test,"Warren County",Mississippi,0.52,0.35,37500000,3,NULL,NULL
+19,"Chemical Company ",NULL,"Chemical Plant ","Warren County",Mississippi,0.10,0.30,38000000,3,NULL,NULL
+20,"CF Industries",NULL,"Medicine Hat Nitrogen Complex",-,-,0.46,0.44,64000000,4,NULL,NULL

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="rtitestModelStoreContainer" CdmEntityContainer="rtitestEntities">
+  <EntityContainerMapping StorageEntityContainer="rtitestModelStoreContainer" CdmEntityContainer="RTIDBContext">
     <EntitySetMapping Name="cond_archive">
       <EntityTypeMapping TypeName="rtitestModel.cond_archive">
         <MappingFragment StoreEntitySet="cond_archive">

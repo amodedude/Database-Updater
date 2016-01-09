@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="RTI.Database.Updater.dll.exe.manifest" size="6423">
+    <dependentAssembly dependencyType="install" codebase="RTI.Database.Updater.dll.exe.manifest" size="6809">
       <assemblyIdentity name="RTI.Database.Updater.dll.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qxlwb2+zto9BL8USsirj/hNPWkky/VZDpDRnV80/YsU=</dsig:DigestValue>
+        <dsig:DigestValue>62dFhOciI4CpIOQ7iK/Vzk/AlP0JwO8Ed3VIhgaZaKc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

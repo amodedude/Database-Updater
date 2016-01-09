@@ -1,0 +1,9 @@
+customer_customerID,first_sourceID,second_sourceID,firstSourcePercentage
+1,2426,0,100
+2,2426,0,100
+3,2426,0,100
+4,2426,0,100
+17,2426,0,100
+18,2426,0,100
+19,2426,0,100
+20,0,0,100

@@ -56,7 +56,7 @@ namespace RTI.DataBase.Application
                         // Get the USGSID
                         try
                         {
-                            long USGSID = Convert.ToInt64(Decimal.Parse(source.agency_id.PadRight(8,'0')));
+                            string USGSID = source.agency_id;
                             download_file(USGSID); // Fetch the file
                         }
                         catch (Exception e)
@@ -114,7 +114,7 @@ namespace RTI.DataBase.Application
         /// contaning conductivity information. 
         /// </summary>
         /// <param name="USGSID"></param>
-        private void download_file(long USGSID)
+        private void download_file(string USGSID)
         {
             UserInterface.WriteToConsole("Downloading File with USGSID =  " + Convert.ToString(USGSID));
 
