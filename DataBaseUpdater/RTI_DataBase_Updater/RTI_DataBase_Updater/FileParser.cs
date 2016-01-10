@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace RTI.Database.Updater
 {
@@ -40,5 +41,21 @@ namespace RTI.Database.Updater
             }
         }
 
-    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public void parseLine (string fileContents)
+        {
+            DateTime date;
+            double conductivityValue; 
+
+
+        }
+
+    public Dictionary<DateTime, double> cond { get; set; }
+
+
+}
 }
