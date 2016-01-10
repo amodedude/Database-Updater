@@ -32,6 +32,7 @@ namespace RTI.DataBase.Application
                 Console.Clear();
                 UserInterface.WriteToConsole("Fetching the list of sources from the RTI database.\nPlease wait...");
                 RTIDBContext RTIContext = new RTIDBContext();
+                FileParser parseFile = new FileParser();
                 var sourceList = RTIContext.sources.ToList();
                 int numberOfFilesToDownload = sourceList.Count() - 1;
                 int filesDownloaded = 0;
@@ -57,7 +58,8 @@ namespace RTI.DataBase.Application
                         try
                         {
                             string USGSID = source.agency_id;
-                            download_file(USGSID); // Fetch the file
+                            string filePath = download_file(USGSID); // Fetch the file
+                            parseFile.ReadFile(filePath); // Read the fetched file contents 
                         }
                         catch (Exception e)
                         {
@@ -114,21 +116,26 @@ namespace RTI.DataBase.Application
         /// contaning conductivity information. 
         /// </summary>
         /// <param name="USGSID"></param>
-        private void download_file(string USGSID)
+        /// <returns>
+        /// Retucns the downloaded files full path.
+        /// </returns>
+        private string download_file(string USGSID)
         {
             UserInterface.WriteToConsole("Downloading File with USGSID =  " + Convert.ToString(USGSID));
 
             download_finished = false;
+            string full_file_path;
             using (var client = new WebClient())
             {
                 string USGS_URL = "http://nwis.waterdata.usgs.gov/nwis/uv?cb_00095=on&format=rdb&site_no=" + USGSID + "&period=1095";
                 Uri USGS_URI = new Uri(USGS_URL, UriKind.Absolute);
                 string file_name = USGSID + ".txt";
                 string folder_path = @"C:\Users\John\Desktop\RTI File Repository\";
-                string full_file_path = folder_path + file_name;
+                full_file_path = folder_path + file_name;
                 client.DownloadFile(USGS_URI.AbsoluteUri, full_file_path);
             }
             download_finished = true;
+            return full_file_path;
         }
     }
 }
