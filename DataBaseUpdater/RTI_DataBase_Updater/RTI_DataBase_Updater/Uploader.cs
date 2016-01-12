@@ -13,9 +13,15 @@ namespace RTI.Database.Updater
     {
         public void beginUpload(List<WaterData> data)
         {
-            foreach (var instant in data)
+            using (var db = new RTIDBContext())
             {
-               //TODO - Add data to the RTI DB here~!
+                foreach (var day in data)
+                {
+                    //TODO - Ensure that correct SOURCEID gets added to rowdata entry!
+                    var rowdata = new water_data { measurment_date = day.date.ToString(), cond = Convert.ToInt32(day.waterConductivity), temp = null };
+                    var waterData = db.Set<water_data>();
+                    waterData.Add(rowdata);
+                }
             }
         }
     }
