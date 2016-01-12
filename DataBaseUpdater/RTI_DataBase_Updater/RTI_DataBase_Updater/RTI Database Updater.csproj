@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationStart.cs" />
+    <Compile Include="Uploader.cs" />
     <Compile Include="cond_archive.cs">
       <DependentUpon>RTIDB.tt</DependentUpon>
     </Compile>
