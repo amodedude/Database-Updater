@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 using System.Collections.Generic;
+
 
 namespace RTI.Database.Updater
 {
@@ -34,12 +36,14 @@ namespace RTI.Database.Updater
                     // Read the stream to a string, and write the string to the console
                     var data = extractData(sr);
                     Uploader rtiUploader = new Uploader();
-                    rtiUploader.beginUpload(data);
+                    if(data.Count() > 0) // Only upload if there is data to be uploaded. 
+                        rtiUploader.beginUpload(data);
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("The file could not be read:");
+                System.Diagnostics.Debugger.Break();
+                Console.WriteLine("There was an error reading this file: ");
                 Console.WriteLine(e.Message);
             }
         }
@@ -51,16 +55,16 @@ namespace RTI.Database.Updater
         /// </summary>
         /// <param name="fileContents"></param>
         /// <returns></returns>
-        public List<WaterData> extractData (StreamReader fileContents)
+        private int dateCol = 0, condCol = 0;
+        private List<water_data> extractData (StreamReader fileContents)
         {
             Dictionary<DateTime, int> conductivity = new Dictionary<DateTime, int>();
-
             DateTime date;
-            double cond;
-            List <WaterData> data = new List<WaterData>();
+            int cond;
+            List <water_data> data = new List<water_data>();
             char[] delimiter = new char[] { '\t' };
-            int dateCol = 0, condCol = 0, numHeaders = 2;
-
+            int numHeaders = 2;
+            bool isHeaderFound = false;
 
             try {
                 // Read the file line by line 
@@ -71,29 +75,40 @@ namespace RTI.Database.Updater
                     // Extract Data
                     if (!line.StartsWith("#"))
                     {
-                        if (!line.Contains("agency_cd") || !line.Contains("site_no") || !line.Contains("datetime"))
+                        if ((!line.Contains("agency_cd") || !line.Contains("site_no") || !line.Contains("datetime")) && isHeaderFound)
                         {
                             var segments = line.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
-                            date = Convert.ToDateTime(segments[dateCol]);
-                            cond = Convert.ToDouble(segments[condCol]);
+                            bool dateFormatOk = DateTime.TryParse(segments[dateCol], out date);
+                            bool condFormatOk = int.TryParse(segments[condCol], out cond);
 
-                            var todaysData = new WaterData();
-                            todaysData.date = date;
-                            todaysData.waterConductivity = cond;
+                            if (dateFormatOk && condFormatOk)
+                            {
+                                var todaysData = new water_data();
+                                todaysData.measurment_date = date.ToString("MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+                                todaysData.cond = cond;
 
-                            data.Add(todaysData);
+                                data.Add(todaysData);
 
-                            //DEBUG
-                            Console.WriteLine(date + " " + cond);
+                                //DEBUG
+                                Console.WriteLine(date + " " + cond);
+                            }
                         }
                         else
                         {
                             var header = line.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
-                            dateCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value == "datetime").Select(p => p.Index).ToList().First();
-                            condCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value.Contains("00095") && !p.Value.Contains("cd")).Select(p => p.Index).ToList().First();
+                            dateCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value == "datetime").Select(p => p.Index).ToList().DefaultIfEmpty(-999).FirstOrDefault();
+                            condCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value.Contains("00095") && !p.Value.Contains("cd")).Select(p => p.Index).ToList().DefaultIfEmpty(-999).FirstOrDefault();
 
-                            for (int i = 0; i < numHeaders - 1; i++)
-                                fileContents.ReadLine();
+                            if (dateCol != -999 && condCol != -999) // If -999, than "datetime" and "00095" do not exist in this line. 
+                            {
+                                isHeaderFound = true;
+                                for (int i = 0; i < numHeaders - 1; i++)
+                                    fileContents.ReadLine();
+                            }
+                            else
+                            {
+                                break; // Stop reading the file, Incorrect file format
+                            }
                         }
                     }
                 }
@@ -101,6 +116,7 @@ namespace RTI.Database.Updater
             }
             catch(Exception ex)
             {
+                System.Diagnostics.Debugger.Break();
                 throw ex;
             }
             finally
@@ -108,15 +124,5 @@ namespace RTI.Database.Updater
                 fileContents.Dispose();
             }    
         }
-    }
-
-    /// <summary>
-    /// Used to store water data durring the file reading process. 
-    /// </summary>
-    class WaterData
-    {
-        public DateTime date { get; set; }
-        public double waterConductivity { get; set; }
-    }
-    
+    }   
 }

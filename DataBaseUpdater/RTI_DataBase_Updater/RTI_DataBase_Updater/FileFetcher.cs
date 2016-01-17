@@ -61,11 +61,12 @@ namespace RTI.DataBase.Application
                             string filePath = download_file(USGSID); // Fetch the file
                             parseFile.ReadFile(filePath); // Read the fetched file contents 
                         }
-                        catch (Exception e)
+                        catch (Exception ex)
                         {
+                            System.Diagnostics.Debugger.Break();
                             UserInterface.WriteToConsole("\nError: Unable to download file {0} of {1}.\n\nSite ID = {2:N}, \nName = {3}", 
                                                           filesDownloaded+1, numberOfFilesToDownload, source.agency_id, source.full_site_name);
-                            UserInterface.WriteToConsole("Exception Message:{0}", e.Message.ToString());
+                            UserInterface.WriteToConsole("Exception Message:{0}", ex.Message.ToString());
                             failedSiteIDs.Add(source.agency_id);
                         }
                         finally
@@ -79,9 +80,11 @@ namespace RTI.DataBase.Application
                 UserInterface.WriteToConsole("\nFle download(s) complete!\n\nInitializing upload process...");
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                System.Diagnostics.Debugger.Break();
+                Console.WriteLine(ex.Message);
+                throw ex;
             }
         }
 

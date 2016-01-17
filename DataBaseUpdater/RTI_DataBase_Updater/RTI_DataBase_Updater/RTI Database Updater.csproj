@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <EntityDeploy Include="RTIDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -158,6 +159,7 @@
     </None>
     <None Include="RTIDB.edmx.diagram">
       <DependentUpon>RTIDB.edmx</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="RTIDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
