@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RTI.Database.Updater;
 using RTI.DataBase.Application.Controllers;
 
 namespace RTI.DataBase.Application
@@ -15,6 +12,7 @@ namespace RTI.DataBase.Application
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(Application_ProcessExit);
             //SetUpWindow(ConsoleColor.Green, 1, 1);
             string welcomeMessage =
              "\n ---------------------------------------------------------------------\n"
@@ -55,6 +53,17 @@ namespace RTI.DataBase.Application
             Console.ForegroundColor = foregroundColor;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Title = "RTI Database Auto-Updater";
+        }
+
+        /// <summary>
+        /// On Exit event. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        static void Application_ProcessExit(object sender, EventArgs e)
+        {
+            Console.WriteLine("Application Termintated.");
+            ApplicationLog.WriteMessageToLog("***Application Terminated****", true, true);          
         }
     }
 }

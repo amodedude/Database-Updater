@@ -10,7 +10,7 @@ namespace RTI.Database.Updater
     /// <summary>
     /// Handles reading of downloaded files. 
     /// </summary>
-    class FileParser
+    sealed class FileParser
     {
         /// <summary>
         /// Initializes the file read opperation. 
@@ -18,8 +18,9 @@ namespace RTI.Database.Updater
         /// <param name="filePath"></param>
         public void ReadFile(string filePath)
         {
-            //TODO - Verify that the file/path actually exist...
-            OpenFile(filePath);
+            CurrentLineNumber = 0;
+            if (File.Exists(filePath))
+                OpenFile(filePath);
         }
 
         /// <summary>
@@ -30,21 +31,24 @@ namespace RTI.Database.Updater
         {
             try
             {
+                ApplicationLog.WriteMessageToLog("Opening File: " + filePath, true, true);
+
                 // Open the text file using a stream reader.
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     // Read the stream to a string, and write the string to the console
-                    var data = extractData(sr);
+                    var data = extractData(sr, filePath);
                     Uploader rtiUploader = new Uploader();
                     if(data.Count() > 0) // Only upload if there is data to be uploaded. 
                         rtiUploader.beginUpload(data);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true);
                 System.Diagnostics.Debugger.Break();
                 Console.WriteLine("There was an error reading this file: ");
-                Console.WriteLine(e.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -56,7 +60,7 @@ namespace RTI.Database.Updater
         /// <param name="fileContents"></param>
         /// <returns></returns>
         private int dateCol = 0, condCol = 0;
-        private List<water_data> extractData (StreamReader fileContents)
+        private List<water_data> extractData (StreamReader fileContents, string filePath)
         {
             Dictionary<DateTime, int> conductivity = new Dictionary<DateTime, int>();
             DateTime date;
@@ -107,7 +111,8 @@ namespace RTI.Database.Updater
                             }
                             else
                             {
-                                break; // Stop reading the file, Incorrect file format
+                                Console.WriteLine("\n" + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".");
+                                break; // Stop reading the file uppon incorrect text format detection
                             }
                         }
                     }
@@ -116,13 +121,31 @@ namespace RTI.Database.Updater
             }
             catch(Exception ex)
             {
+                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true);
                 System.Diagnostics.Debugger.Break();
                 throw ex;
             }
             finally
             {
-                fileContents.Dispose();
+                fileContents.Dispose();                
             }    
         }
+
+        /// <summary>
+        /// Stores the current line number being read. 
+        /// </summary>
+        private long CurrentLineNumber { get; set; }
+
+        /// <summary>
+        /// Reads the next line in the file stream.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        private string ReadNextLine (StreamReader fileStream)
+        {
+            CurrentLineNumber++; // Advance to the next line
+            return fileStream.ReadLine();
+        }
+
     }   
 }

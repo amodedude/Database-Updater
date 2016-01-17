@@ -93,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationLog.cs" />
     <Compile Include="ApplicationStart.cs" />
     <Compile Include="Uploader.cs" />
     <Compile Include="cond_archive.cs">

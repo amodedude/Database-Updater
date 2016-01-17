@@ -91,14 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RTI.Database.Updater.dll.exe" size="101376">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RTI.Database.Updater.dll.exe" size="104960">
       <assemblyIdentity name="RTI.Database.Updater.dll" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hPHYoCQL0GbM73ZGjkzEZi0a8RId6WWjDH+iDBEwTZY=</dsig:DigestValue>
+        <dsig:DigestValue>VrtH/HibRJrf8KmJLJe1+MAZbNOyhIC74btdid7uWGE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
