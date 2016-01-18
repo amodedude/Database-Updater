@@ -4,65 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="rtitestModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="cond_archive">
-          <Key>
-            <PropertyRef Name="dataID" />
-          </Key>
-          <Property Name="dataID" Type="int" Nullable="false" />
-          <Property Name="cond" Type="int" />
-          <Property Name="temp" Type="int" />
-          <Property Name="measurment_date" Type="varchar" MaxLength="45" />
-          <Property Name="sourceID" Type="int" />
-        </EntityType>
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="customerID" />
-          </Key>
-          <Property Name="customerID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="45" />
-          <Property Name="company" Type="varchar" MaxLength="45" />
-          <Property Name="plant" Type="varchar" MaxLength="45" />
-          <Property Name="city" Type="varchar" MaxLength="45" />
-          <Property Name="state" Type="varchar" MaxLength="45" />
-          <Property Name="acid_price" Type="decimal" Precision="4" Scale="2" />
-          <Property Name="caustic_price" Type="decimal" Precision="4" Scale="2" />
-          <Property Name="demand" Type="int" />
-          <Property Name="num_trains" Type="uint" />
-          <Property Name="date_added" Type="varchar" MaxLength="45" />
-          <Property Name="notes" Type="varchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="customer_water">
-          <Key>
-            <PropertyRef Name="customer_customerID" />
-            <PropertyRef Name="first_sourceID" />
-            <PropertyRef Name="second_sourceID" />
-          </Key>
-          <Property Name="customer_customerID" Type="uint" Nullable="false" />
-          <Property Name="first_sourceID" Type="int" Nullable="false" />
-          <Property Name="second_sourceID" Type="int" Nullable="false" />
-          <Property Name="firstSourcePercentage" Type="int" />
-        </EntityType>
-        <EntityType Name="resin_products">
-          <Key>
-            <PropertyRef Name="resin_product_id" />
-          </Key>
-          <Property Name="resin_product_id" Type="int" Nullable="false" />
-          <Property Name="manufacturer" Type="varchar" MaxLength="45" />
-          <Property Name="name" Type="varchar" MaxLength="45" />
-          <Property Name="model_number" Type="varchar" MaxLength="45" />
-          <Property Name="resin_type" Type="varchar" MaxLength="45" />
-          <Property Name="primary_type" Type="varchar" MaxLength="45" />
-          <Property Name="group" Type="varchar" MaxLength="45" />
-          <Property Name="teir" Type="varchar" MaxLength="45" />
-          <Property Name="chemical_structure" Type="varchar" MaxLength="45" />
-          <Property Name="physical_structure" Type="varchar" MaxLength="45" />
-          <Property Name="color" Type="varchar" MaxLength="45" />
-          <Property Name="total_capacity" Type="varchar" MaxLength="45" />
-          <Property Name="salt_split_CAP" Type="varchar" MaxLength="45" />
-          <Property Name="price_per_cuft" Type="varchar" MaxLength="45" />
-          <Property Name="comments" Type="varchar" MaxLength="500" />
-        </EntityType>
+      <Schema Namespace="rtidevModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sources">
           <Key>
             <PropertyRef Name="sources_sourceID" />
@@ -92,217 +34,25 @@
           <Property Name="full_site_name" Type="varchar" MaxLength="255" />
           <Property Name="unique_site_name" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="train">
-          <Key>
-            <PropertyRef Name="trainID" />
-            <PropertyRef Name="customer_customerID" />
-          </Key>
-          <Property Name="trainID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="45" />
-          <Property Name="number" Type="int" />
-          <Property Name="gpm" Type="varchar" MaxLength="45" />
-          <Property Name="num_beds_cation" Type="int" />
-          <Property Name="num_beds_anion" Type="int" />
-          <Property Name="using_manifold" Type="varchar" MaxLength="45" />
-          <Property Name="regens_per_month" Type="varchar" MaxLength="45" />
-          <Property Name="regen_duration" Type="varchar" MaxLength="45" />
-          <Property Name="has_mixed_bed" Type="varchar" MaxLength="45" />
-          <Property Name="has_historical_data" Type="varchar" MaxLength="45" />
-          <Property Name="customer_customerID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="vessel">
-          <Key>
-            <PropertyRef Name="vesselID" />
-            <PropertyRef Name="train_trainID" />
-            <PropertyRef Name="resin_data_product_id" />
-          </Key>
-          <Property Name="vesselID" Type="int" Nullable="false" />
-          <Property Name="vessel_number" Type="int" />
-          <Property Name="name" Type="varchar" MaxLength="120" />
-          <Property Name="size" Type="varchar" MaxLength="45" />
-          <Property Name="bed_number" Type="varchar" MaxLength="45" />
-          <Property Name="lbs_chemical" Type="varchar" MaxLength="45" />
-          <Property Name="date_replaced" Type="varchar" MaxLength="45" />
-          <Property Name="replacement_plan" Type="varchar" MaxLength="45" />
-          <Property Name="throughput" Type="varchar" MaxLength="45" />
-          <Property Name="num_regens" Type="varchar" MaxLength="45" />
-          <Property Name="toc" Type="varchar" MaxLength="45" />
-          <Property Name="with_degassifier" Type="varchar" MaxLength="45" />
-          <Property Name="with_polisher" Type="varchar" MaxLength="45" />
-          <Property Name="vessel_customerID" Type="varchar" MaxLength="45" />
-          <Property Name="train_trainID" Type="int" Nullable="false" />
-          <Property Name="resin_data_product_id" Type="int" Nullable="false" />
-          <Property Name="Salt_Split" Type="double" />
-          <Property Name="price_cuft_resin" Type="double" />
-        </EntityType>
-        <EntityType Name="vessel_historical">
-          <Key>
-            <PropertyRef Name="sampleID" />
-          </Key>
-          <Property Name="sampleID" Type="int" Nullable="false" />
-          <Property Name="date" Type="varchar" MaxLength="45" />
-          <Property Name="lbs_chemical" Type="int" />
-          <Property Name="throughput" Type="varchar" MaxLength="45" />
-          <Property Name="num_regens" Type="varchar" MaxLength="45" />
-          <Property Name="toc" Type="varchar" MaxLength="45" />
-          <Property Name="vessel_historical_customerID" Type="varchar" MaxLength="45" />
-        </EntityType>
         <EntityType Name="water_data">
           <Key>
             <PropertyRef Name="dataID" />
           </Key>
-          <Property Name="dataID" Type="int" Nullable="false" />
+          <Property Name="dataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cond" Type="int" />
           <Property Name="temp" Type="int" />
           <Property Name="measurment_date" Type="varchar" MaxLength="45" />
-          <Property Name="sourceID" Type="int" />
+          <Property Name="sourceid" Type="varchar" MaxLength="255" />
         </EntityType>
-        <Association Name="fk_customer_water_customer1">
-          <End Role="customer" Type="Self.customer" Multiplicity="1" />
-          <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="customerID" />
-            </Principal>
-            <Dependent Role="customer_water">
-              <PropertyRef Name="customer_customerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_customer_water_sources1">
-          <End Role="sources" Type="Self.sources" Multiplicity="1" />
-          <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sources">
-              <PropertyRef Name="sources_sourceID" />
-            </Principal>
-            <Dependent Role="customer_water">
-              <PropertyRef Name="first_sourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_customer_water_sources2">
-          <End Role="sources" Type="Self.sources" Multiplicity="1" />
-          <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sources">
-              <PropertyRef Name="sources_sourceID" />
-            </Principal>
-            <Dependent Role="customer_water">
-              <PropertyRef Name="second_sourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_vessel_resin_products1">
-          <End Role="resin_products" Type="Self.resin_products" Multiplicity="1" />
-          <End Role="vessel" Type="Self.vessel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="resin_products">
-              <PropertyRef Name="resin_product_id" />
-            </Principal>
-            <Dependent Role="vessel">
-              <PropertyRef Name="resin_data_product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'fk_vessel_train1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="fk_vessel_train1" />-->
-        <EntityContainer Name="rtitestModelStoreContainer">
-          <EntitySet Name="cond_archive" EntityType="Self.cond_archive" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="customer" EntityType="Self.customer" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="customer_water" EntityType="Self.customer_water" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="resin_products" EntityType="Self.resin_products" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="sources" EntityType="Self.sources" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="train" EntityType="Self.train" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="vessel" EntityType="Self.vessel" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="vessel_historical" EntityType="Self.vessel_historical" Schema="rtitest" store:Type="Tables" />
-          <EntitySet Name="water_data" EntityType="Self.water_data" Schema="rtitest" store:Type="Tables" />
-          <AssociationSet Name="fk_customer_water_customer1" Association="Self.fk_customer_water_customer1">
-            <End Role="customer" EntitySet="customer" />
-            <End Role="customer_water" EntitySet="customer_water" />
-          </AssociationSet>
-          <AssociationSet Name="fk_customer_water_sources1" Association="Self.fk_customer_water_sources1">
-            <End Role="sources" EntitySet="sources" />
-            <End Role="customer_water" EntitySet="customer_water" />
-          </AssociationSet>
-          <AssociationSet Name="fk_customer_water_sources2" Association="Self.fk_customer_water_sources2">
-            <End Role="sources" EntitySet="sources" />
-            <End Role="customer_water" EntitySet="customer_water" />
-          </AssociationSet>
-          <AssociationSet Name="fk_vessel_resin_products1" Association="Self.fk_vessel_resin_products1">
-            <End Role="resin_products" EntitySet="resin_products" />
-            <End Role="vessel" EntitySet="vessel" />
-          </AssociationSet>
+        <EntityContainer Name="rtidevModelStoreContainer">
+          <EntitySet Name="sources" EntityType="Self.sources" Schema="rtidev" store:Type="Tables" />
+          <EntitySet Name="water_data" EntityType="Self.water_data" Schema="rtidev" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="rtitestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="cond_archive">
-          <Key>
-            <PropertyRef Name="dataID" />
-          </Key>
-          <Property Name="dataID" Type="Int32" Nullable="false" />
-          <Property Name="cond" Type="Int32" />
-          <Property Name="temp" Type="Int32" />
-          <Property Name="measurment_date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="sourceID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="customerID" />
-          </Key>
-          <Property Name="customerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="company" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="plant" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="state" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="acid_price" Type="Decimal" />
-          <Property Name="caustic_price" Type="Decimal" />
-          <Property Name="demand" Type="Int32" />
-          <Property Name="num_trains" Type="Int64" />
-          <Property Name="date_added" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="customer_water" Relationship="Self.fk_customer_water_customer1" FromRole="customer" ToRole="customer_water" />
-        </EntityType>
-        <EntityType Name="customer_water">
-          <Key>
-            <PropertyRef Name="customer_customerID" />
-            <PropertyRef Name="first_sourceID" />
-            <PropertyRef Name="second_sourceID" />
-          </Key>
-          <Property Name="customer_customerID" Type="Int64" Nullable="false" />
-          <Property Name="first_sourceID" Type="Int32" Nullable="false" />
-          <Property Name="second_sourceID" Type="Int32" Nullable="false" />
-          <Property Name="firstSourcePercentage" Type="Int32" />
-          <NavigationProperty Name="customer" Relationship="Self.fk_customer_water_customer1" FromRole="customer_water" ToRole="customer" />
-          <NavigationProperty Name="source" Relationship="Self.fk_customer_water_sources1" FromRole="customer_water" ToRole="sources" />
-          <NavigationProperty Name="source1" Relationship="Self.fk_customer_water_sources2" FromRole="customer_water" ToRole="sources" />
-        </EntityType>
-        <EntityType Name="resin_products">
-          <Key>
-            <PropertyRef Name="resin_product_id" />
-          </Key>
-          <Property Name="resin_product_id" Type="Int32" Nullable="false" />
-          <Property Name="manufacturer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="model_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="resin_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="primary_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="group" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="teir" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="chemical_structure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="physical_structure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="color" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="total_capacity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="salt_split_CAP" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="price_per_cuft" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="vessels" Relationship="Self.fk_vessel_resin_products1" FromRole="resin_products" ToRole="vessel" />
-        </EntityType>
+      <Schema Namespace="rtidevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="source">
           <Key>
             <PropertyRef Name="sources_sourceID" />
@@ -331,218 +81,29 @@ warning 6035: The relationship 'fk_vessel_train1' has columns that are not part 
           <Property Name="agency_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="full_site_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="unique_site_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="customer_water" Relationship="Self.fk_customer_water_sources1" FromRole="sources" ToRole="customer_water" />
-          <NavigationProperty Name="customer_water1" Relationship="Self.fk_customer_water_sources2" FromRole="sources" ToRole="customer_water" />
-        </EntityType>
-        <EntityType Name="train">
-          <Key>
-            <PropertyRef Name="trainID" />
-            <PropertyRef Name="customer_customerID" />
-          </Key>
-          <Property Name="trainID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="number" Type="Int32" />
-          <Property Name="gpm" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="num_beds_cation" Type="Int32" />
-          <Property Name="num_beds_anion" Type="Int32" />
-          <Property Name="using_manifold" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="regens_per_month" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="regen_duration" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="has_mixed_bed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="has_historical_data" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="customer_customerID" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="vessel">
-          <Key>
-            <PropertyRef Name="vesselID" />
-            <PropertyRef Name="train_trainID" />
-            <PropertyRef Name="resin_data_product_id" />
-          </Key>
-          <Property Name="vesselID" Type="Int32" Nullable="false" />
-          <Property Name="vessel_number" Type="Int32" />
-          <Property Name="name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
-          <Property Name="size" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="bed_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="lbs_chemical" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="date_replaced" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="replacement_plan" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="throughput" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="num_regens" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="toc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="with_degassifier" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="with_polisher" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="vessel_customerID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="train_trainID" Type="Int32" Nullable="false" />
-          <Property Name="resin_data_product_id" Type="Int32" Nullable="false" />
-          <Property Name="Salt_Split" Type="Double" />
-          <Property Name="price_cuft_resin" Type="Double" />
-          <NavigationProperty Name="resin_products" Relationship="Self.fk_vessel_resin_products1" FromRole="vessel" ToRole="resin_products" />
-        </EntityType>
-        <EntityType Name="vessel_historical">
-          <Key>
-            <PropertyRef Name="sampleID" />
-          </Key>
-          <Property Name="sampleID" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="lbs_chemical" Type="Int32" />
-          <Property Name="throughput" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="num_regens" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="toc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="vessel_historical_customerID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="water_data">
           <Key>
             <PropertyRef Name="dataID" />
           </Key>
-          <Property Name="dataID" Type="Int32" Nullable="false" />
+          <Property Name="dataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cond" Type="Int32" />
           <Property Name="temp" Type="Int32" />
           <Property Name="measurment_date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="sourceID" Type="Int32" />
+          <Property Name="sourceid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="fk_customer_water_customer1">
-          <End Role="customer" Type="Self.customer" Multiplicity="1" />
-          <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer">
-              <PropertyRef Name="customerID" />
-            </Principal>
-            <Dependent Role="customer_water">
-              <PropertyRef Name="customer_customerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_customer_water_sources1">
-          <End Role="sources" Type="Self.source" Multiplicity="1" />
-          <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sources">
-              <PropertyRef Name="sources_sourceID" />
-            </Principal>
-            <Dependent Role="customer_water">
-              <PropertyRef Name="first_sourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_customer_water_sources2">
-          <End Role="sources" Type="Self.source" Multiplicity="1" />
-          <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="sources">
-              <PropertyRef Name="sources_sourceID" />
-            </Principal>
-            <Dependent Role="customer_water">
-              <PropertyRef Name="second_sourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_vessel_resin_products1">
-          <End Role="resin_products" Type="Self.resin_products" Multiplicity="1" />
-          <End Role="vessel" Type="Self.vessel" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="resin_products">
-              <PropertyRef Name="resin_product_id" />
-            </Principal>
-            <Dependent Role="vessel">
-              <PropertyRef Name="resin_data_product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="RTIDBContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cond_archive" EntityType="Self.cond_archive" />
-          <EntitySet Name="customers" EntityType="Self.customer" />
-          <EntitySet Name="customer_water" EntityType="Self.customer_water" />
-          <EntitySet Name="resin_products" EntityType="Self.resin_products" />
+        <EntityContainer Name="rtidevEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sources" EntityType="Self.source" />
-          <EntitySet Name="trains" EntityType="Self.train" />
-          <EntitySet Name="vessels" EntityType="Self.vessel" />
-          <EntitySet Name="vessel_historical" EntityType="Self.vessel_historical" />
           <EntitySet Name="water_data" EntityType="Self.water_data" />
-          <AssociationSet Name="fk_customer_water_customer1" Association="Self.fk_customer_water_customer1">
-            <End Role="customer" EntitySet="customers" />
-            <End Role="customer_water" EntitySet="customer_water" />
-          </AssociationSet>
-          <AssociationSet Name="fk_customer_water_sources1" Association="Self.fk_customer_water_sources1">
-            <End Role="sources" EntitySet="sources" />
-            <End Role="customer_water" EntitySet="customer_water" />
-          </AssociationSet>
-          <AssociationSet Name="fk_customer_water_sources2" Association="Self.fk_customer_water_sources2">
-            <End Role="sources" EntitySet="sources" />
-            <End Role="customer_water" EntitySet="customer_water" />
-          </AssociationSet>
-          <AssociationSet Name="fk_vessel_resin_products1" Association="Self.fk_vessel_resin_products1">
-            <End Role="resin_products" EntitySet="resin_products" />
-            <End Role="vessel" EntitySet="vessels" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="rtitestModelStoreContainer" CdmEntityContainer="RTIDBContext">
-          <EntitySetMapping Name="cond_archive">
-            <EntityTypeMapping TypeName="rtitestModel.cond_archive">
-              <MappingFragment StoreEntitySet="cond_archive">
-                <ScalarProperty Name="dataID" ColumnName="dataID" />
-                <ScalarProperty Name="cond" ColumnName="cond" />
-                <ScalarProperty Name="temp" ColumnName="temp" />
-                <ScalarProperty Name="measurment_date" ColumnName="measurment_date" />
-                <ScalarProperty Name="sourceID" ColumnName="sourceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="customers">
-            <EntityTypeMapping TypeName="rtitestModel.customer">
-              <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="customerID" ColumnName="customerID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="company" ColumnName="company" />
-                <ScalarProperty Name="plant" ColumnName="plant" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="acid_price" ColumnName="acid_price" />
-                <ScalarProperty Name="caustic_price" ColumnName="caustic_price" />
-                <ScalarProperty Name="demand" ColumnName="demand" />
-                <ScalarProperty Name="num_trains" ColumnName="num_trains" />
-                <ScalarProperty Name="date_added" ColumnName="date_added" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="customer_water">
-            <EntityTypeMapping TypeName="rtitestModel.customer_water">
-              <MappingFragment StoreEntitySet="customer_water">
-                <ScalarProperty Name="customer_customerID" ColumnName="customer_customerID" />
-                <ScalarProperty Name="first_sourceID" ColumnName="first_sourceID" />
-                <ScalarProperty Name="second_sourceID" ColumnName="second_sourceID" />
-                <ScalarProperty Name="firstSourcePercentage" ColumnName="firstSourcePercentage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="resin_products">
-            <EntityTypeMapping TypeName="rtitestModel.resin_products">
-              <MappingFragment StoreEntitySet="resin_products">
-                <ScalarProperty Name="resin_product_id" ColumnName="resin_product_id" />
-                <ScalarProperty Name="manufacturer" ColumnName="manufacturer" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="model_number" ColumnName="model_number" />
-                <ScalarProperty Name="resin_type" ColumnName="resin_type" />
-                <ScalarProperty Name="primary_type" ColumnName="primary_type" />
-                <ScalarProperty Name="group" ColumnName="group" />
-                <ScalarProperty Name="teir" ColumnName="teir" />
-                <ScalarProperty Name="chemical_structure" ColumnName="chemical_structure" />
-                <ScalarProperty Name="physical_structure" ColumnName="physical_structure" />
-                <ScalarProperty Name="color" ColumnName="color" />
-                <ScalarProperty Name="total_capacity" ColumnName="total_capacity" />
-                <ScalarProperty Name="salt_split_CAP" ColumnName="salt_split_CAP" />
-                <ScalarProperty Name="price_per_cuft" ColumnName="price_per_cuft" />
-                <ScalarProperty Name="comments" ColumnName="comments" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="rtidevModelStoreContainer" CdmEntityContainer="rtidevEntities">
           <EntitySetMapping Name="sources">
-            <EntityTypeMapping TypeName="rtitestModel.source">
+            <EntityTypeMapping TypeName="rtidevModel.source">
               <MappingFragment StoreEntitySet="sources">
                 <ScalarProperty Name="sources_sourceID" ColumnName="sources_sourceID" />
                 <ScalarProperty Name="river" ColumnName="river" />
@@ -571,69 +132,14 @@ warning 6035: The relationship 'fk_vessel_train1' has columns that are not part 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="trains">
-            <EntityTypeMapping TypeName="rtitestModel.train">
-              <MappingFragment StoreEntitySet="train">
-                <ScalarProperty Name="trainID" ColumnName="trainID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="gpm" ColumnName="gpm" />
-                <ScalarProperty Name="num_beds_cation" ColumnName="num_beds_cation" />
-                <ScalarProperty Name="num_beds_anion" ColumnName="num_beds_anion" />
-                <ScalarProperty Name="using_manifold" ColumnName="using_manifold" />
-                <ScalarProperty Name="regens_per_month" ColumnName="regens_per_month" />
-                <ScalarProperty Name="regen_duration" ColumnName="regen_duration" />
-                <ScalarProperty Name="has_mixed_bed" ColumnName="has_mixed_bed" />
-                <ScalarProperty Name="has_historical_data" ColumnName="has_historical_data" />
-                <ScalarProperty Name="customer_customerID" ColumnName="customer_customerID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vessels">
-            <EntityTypeMapping TypeName="rtitestModel.vessel">
-              <MappingFragment StoreEntitySet="vessel">
-                <ScalarProperty Name="vesselID" ColumnName="vesselID" />
-                <ScalarProperty Name="vessel_number" ColumnName="vessel_number" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="size" ColumnName="size" />
-                <ScalarProperty Name="bed_number" ColumnName="bed_number" />
-                <ScalarProperty Name="lbs_chemical" ColumnName="lbs_chemical" />
-                <ScalarProperty Name="date_replaced" ColumnName="date_replaced" />
-                <ScalarProperty Name="replacement_plan" ColumnName="replacement_plan" />
-                <ScalarProperty Name="throughput" ColumnName="throughput" />
-                <ScalarProperty Name="num_regens" ColumnName="num_regens" />
-                <ScalarProperty Name="toc" ColumnName="toc" />
-                <ScalarProperty Name="with_degassifier" ColumnName="with_degassifier" />
-                <ScalarProperty Name="with_polisher" ColumnName="with_polisher" />
-                <ScalarProperty Name="vessel_customerID" ColumnName="vessel_customerID" />
-                <ScalarProperty Name="train_trainID" ColumnName="train_trainID" />
-                <ScalarProperty Name="resin_data_product_id" ColumnName="resin_data_product_id" />
-                <ScalarProperty Name="Salt_Split" ColumnName="Salt_Split" />
-                <ScalarProperty Name="price_cuft_resin" ColumnName="price_cuft_resin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vessel_historical">
-            <EntityTypeMapping TypeName="rtitestModel.vessel_historical">
-              <MappingFragment StoreEntitySet="vessel_historical">
-                <ScalarProperty Name="sampleID" ColumnName="sampleID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="lbs_chemical" ColumnName="lbs_chemical" />
-                <ScalarProperty Name="throughput" ColumnName="throughput" />
-                <ScalarProperty Name="num_regens" ColumnName="num_regens" />
-                <ScalarProperty Name="toc" ColumnName="toc" />
-                <ScalarProperty Name="vessel_historical_customerID" ColumnName="vessel_historical_customerID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="water_data">
-            <EntityTypeMapping TypeName="rtitestModel.water_data">
+            <EntityTypeMapping TypeName="rtidevModel.water_data">
               <MappingFragment StoreEntitySet="water_data">
                 <ScalarProperty Name="dataID" ColumnName="dataID" />
                 <ScalarProperty Name="cond" ColumnName="cond" />
                 <ScalarProperty Name="temp" ColumnName="temp" />
                 <ScalarProperty Name="measurment_date" ColumnName="measurment_date" />
-                <ScalarProperty Name="sourceID" ColumnName="sourceID" />
+                <ScalarProperty Name="sourceid" ColumnName="sourceid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

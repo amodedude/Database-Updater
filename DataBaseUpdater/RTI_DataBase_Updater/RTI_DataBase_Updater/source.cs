@@ -14,12 +14,6 @@ namespace RTI.Database.Updater
     
     public partial class source
     {
-        public source()
-        {
-            this.customer_water = new HashSet<customer_water>();
-            this.customer_water1 = new HashSet<customer_water>();
-        }
-    
         public int sources_sourceID { get; set; }
         public string river { get; set; }
         public string city { get; set; }
@@ -44,8 +38,5 @@ namespace RTI.Database.Updater
         public string agency_id { get; set; }
         public string full_site_name { get; set; }
         public string unique_site_name { get; set; }
-    
-        public virtual ICollection<customer_water> customer_water { get; set; }
-        public virtual ICollection<customer_water> customer_water1 { get; set; }
     }
 }

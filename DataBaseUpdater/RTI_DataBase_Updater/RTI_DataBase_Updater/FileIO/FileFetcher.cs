@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Net;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using RTI.DataBase.Application.Controllers;
 using RTI.Database.Updater;
+using System.Collections.Generic;
+using RTI.DataBase.Application.Controllers;
 
 namespace RTI.DataBase.Application
 {
@@ -31,7 +29,7 @@ namespace RTI.DataBase.Application
                 // Get the list of sources from the RTI database
                 Console.Clear();
                 UserInterface.WriteToConsole("Fetching the list of sources from the RTI database.\nPlease wait...");
-                RTIDBContext RTIContext = new RTIDBContext();
+                rtidevEntities RTIContext = new rtidevEntities();
                 FileParser parseFile = new FileParser();
                 var sourceList = RTIContext.sources.ToList();
                 int numberOfFilesToDownload = sourceList.Count() - 1;

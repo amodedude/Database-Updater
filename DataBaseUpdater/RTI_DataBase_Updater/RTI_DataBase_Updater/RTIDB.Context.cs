@@ -12,11 +12,11 @@ namespace RTI.Database.Updater
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class RTIDBContext : DbContext
+
+    public partial class rtidevEntities : DbContext
     {
-        public RTIDBContext()
-            : base("name=RTIDBContext")
+        public rtidevEntities()
+            : base("name=rtidevEntities")
         {
         }
     
@@ -25,14 +25,7 @@ namespace RTI.Database.Updater
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cond_archive> cond_archive { get; set; }
-        public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<customer_water> customer_water { get; set; }
-        public virtual DbSet<resin_products> resin_products { get; set; }
         public virtual DbSet<source> sources { get; set; }
-        public virtual DbSet<train> trains { get; set; }
-        public virtual DbSet<vessel> vessels { get; set; }
-        public virtual DbSet<vessel_historical> vessel_historical { get; set; }
         public virtual DbSet<water_data> water_data { get; set; }
     }
 }

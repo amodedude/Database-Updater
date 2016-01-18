@@ -37,10 +37,10 @@ namespace RTI.Database.Updater
                 using (StreamReader sr = new StreamReader(filePath))
                 {
                     // Read the stream to a string, and write the string to the console
-                    var data = extractData(sr, filePath);
+                    var data = ExtractData(sr, filePath);
                     Uploader rtiUploader = new Uploader();
                     if(data.Count() > 0) // Only upload if there is data to be uploaded. 
-                        rtiUploader.beginUpload(data);
+                        rtiUploader.Upload(data);
                 }
             }
             catch (Exception ex)
@@ -59,8 +59,8 @@ namespace RTI.Database.Updater
         /// </summary>
         /// <param name="fileContents"></param>
         /// <returns></returns>
-        private int dateCol = 0, condCol = 0;
-        private List<water_data> extractData (StreamReader fileContents, string filePath)
+        private int dateCol = 0, condCol = 0, sourceCol = 0;
+        private List<water_data> ExtractData (StreamReader fileContents, string filePath)
         {
             Dictionary<DateTime, int> conductivity = new Dictionary<DateTime, int>();
             DateTime date;
@@ -84,17 +84,18 @@ namespace RTI.Database.Updater
                             var segments = line.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
                             bool dateFormatOk = DateTime.TryParse(segments[dateCol], out date);
                             bool condFormatOk = int.TryParse(segments[condCol], out cond);
-
+                        
                             if (dateFormatOk && condFormatOk)
                             {
                                 var todaysData = new water_data();
                                 todaysData.measurment_date = date.ToString("MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
                                 todaysData.cond = cond;
+                                todaysData.sourceid = segments[sourceCol];
 
                                 data.Add(todaysData);
 
                                 //DEBUG
-                                Console.WriteLine(date + " " + cond);
+                                Console.WriteLine("SouceID: " + todaysData.sourceid + "    Date: " + date + "    Cond: " + cond);
                             }
                         }
                         else
@@ -102,8 +103,9 @@ namespace RTI.Database.Updater
                             var header = line.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
                             dateCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value == "datetime").Select(p => p.Index).ToList().DefaultIfEmpty(-999).FirstOrDefault();
                             condCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value.Contains("00095") && !p.Value.Contains("cd")).Select(p => p.Index).ToList().DefaultIfEmpty(-999).FirstOrDefault();
+                            sourceCol = header.Select((v, i) => new { Index = i, Value = v }).Where(p => p.Value == "site_no").Select(p => p.Index).ToList().DefaultIfEmpty(-999).FirstOrDefault();
 
-                            if (dateCol != -999 && condCol != -999) // If -999, than "datetime" and "00095" do not exist in this line. 
+                            if (dateCol != -999 && condCol != -999 && sourceCol != -999) // If -999, then parameters do not exist in this line. 
                             {
                                 isHeaderFound = true;
                                 for (int i = 0; i < numHeaders - 1; i++)

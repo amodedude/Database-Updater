@@ -1,68 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="rtitestModelStoreContainer" CdmEntityContainer="RTIDBContext">
-    <EntitySetMapping Name="cond_archive">
-      <EntityTypeMapping TypeName="rtitestModel.cond_archive">
-        <MappingFragment StoreEntitySet="cond_archive">
-          <ScalarProperty Name="dataID" ColumnName="dataID" />
-          <ScalarProperty Name="cond" ColumnName="cond" />
-          <ScalarProperty Name="temp" ColumnName="temp" />
-          <ScalarProperty Name="measurment_date" ColumnName="measurment_date" />
-          <ScalarProperty Name="sourceID" ColumnName="sourceID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="customers">
-      <EntityTypeMapping TypeName="rtitestModel.customer">
-        <MappingFragment StoreEntitySet="customer">
-          <ScalarProperty Name="customerID" ColumnName="customerID" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="company" ColumnName="company" />
-          <ScalarProperty Name="plant" ColumnName="plant" />
-          <ScalarProperty Name="city" ColumnName="city" />
-          <ScalarProperty Name="state" ColumnName="state" />
-          <ScalarProperty Name="acid_price" ColumnName="acid_price" />
-          <ScalarProperty Name="caustic_price" ColumnName="caustic_price" />
-          <ScalarProperty Name="demand" ColumnName="demand" />
-          <ScalarProperty Name="num_trains" ColumnName="num_trains" />
-          <ScalarProperty Name="date_added" ColumnName="date_added" />
-          <ScalarProperty Name="notes" ColumnName="notes" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="customer_water">
-      <EntityTypeMapping TypeName="rtitestModel.customer_water">
-        <MappingFragment StoreEntitySet="customer_water">
-          <ScalarProperty Name="customer_customerID" ColumnName="customer_customerID" />
-          <ScalarProperty Name="first_sourceID" ColumnName="first_sourceID" />
-          <ScalarProperty Name="second_sourceID" ColumnName="second_sourceID" />
-          <ScalarProperty Name="firstSourcePercentage" ColumnName="firstSourcePercentage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="resin_products">
-      <EntityTypeMapping TypeName="rtitestModel.resin_products">
-        <MappingFragment StoreEntitySet="resin_products">
-          <ScalarProperty Name="resin_product_id" ColumnName="resin_product_id" />
-          <ScalarProperty Name="manufacturer" ColumnName="manufacturer" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="model_number" ColumnName="model_number" />
-          <ScalarProperty Name="resin_type" ColumnName="resin_type" />
-          <ScalarProperty Name="primary_type" ColumnName="primary_type" />
-          <ScalarProperty Name="group" ColumnName="group" />
-          <ScalarProperty Name="teir" ColumnName="teir" />
-          <ScalarProperty Name="chemical_structure" ColumnName="chemical_structure" />
-          <ScalarProperty Name="physical_structure" ColumnName="physical_structure" />
-          <ScalarProperty Name="color" ColumnName="color" />
-          <ScalarProperty Name="total_capacity" ColumnName="total_capacity" />
-          <ScalarProperty Name="salt_split_CAP" ColumnName="salt_split_CAP" />
-          <ScalarProperty Name="price_per_cuft" ColumnName="price_per_cuft" />
-          <ScalarProperty Name="comments" ColumnName="comments" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+  <EntityContainerMapping StorageEntityContainer="rtidevModelStoreContainer" CdmEntityContainer="rtidevEntities">
     <EntitySetMapping Name="sources">
-      <EntityTypeMapping TypeName="rtitestModel.source">
+      <EntityTypeMapping TypeName="rtidevModel.source">
         <MappingFragment StoreEntitySet="sources">
           <ScalarProperty Name="sources_sourceID" ColumnName="sources_sourceID" />
           <ScalarProperty Name="river" ColumnName="river" />
@@ -91,69 +31,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="trains">
-      <EntityTypeMapping TypeName="rtitestModel.train">
-        <MappingFragment StoreEntitySet="train">
-          <ScalarProperty Name="trainID" ColumnName="trainID" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="number" ColumnName="number" />
-          <ScalarProperty Name="gpm" ColumnName="gpm" />
-          <ScalarProperty Name="num_beds_cation" ColumnName="num_beds_cation" />
-          <ScalarProperty Name="num_beds_anion" ColumnName="num_beds_anion" />
-          <ScalarProperty Name="using_manifold" ColumnName="using_manifold" />
-          <ScalarProperty Name="regens_per_month" ColumnName="regens_per_month" />
-          <ScalarProperty Name="regen_duration" ColumnName="regen_duration" />
-          <ScalarProperty Name="has_mixed_bed" ColumnName="has_mixed_bed" />
-          <ScalarProperty Name="has_historical_data" ColumnName="has_historical_data" />
-          <ScalarProperty Name="customer_customerID" ColumnName="customer_customerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vessels">
-      <EntityTypeMapping TypeName="rtitestModel.vessel">
-        <MappingFragment StoreEntitySet="vessel">
-          <ScalarProperty Name="vesselID" ColumnName="vesselID" />
-          <ScalarProperty Name="vessel_number" ColumnName="vessel_number" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="size" ColumnName="size" />
-          <ScalarProperty Name="bed_number" ColumnName="bed_number" />
-          <ScalarProperty Name="lbs_chemical" ColumnName="lbs_chemical" />
-          <ScalarProperty Name="date_replaced" ColumnName="date_replaced" />
-          <ScalarProperty Name="replacement_plan" ColumnName="replacement_plan" />
-          <ScalarProperty Name="throughput" ColumnName="throughput" />
-          <ScalarProperty Name="num_regens" ColumnName="num_regens" />
-          <ScalarProperty Name="toc" ColumnName="toc" />
-          <ScalarProperty Name="with_degassifier" ColumnName="with_degassifier" />
-          <ScalarProperty Name="with_polisher" ColumnName="with_polisher" />
-          <ScalarProperty Name="vessel_customerID" ColumnName="vessel_customerID" />
-          <ScalarProperty Name="train_trainID" ColumnName="train_trainID" />
-          <ScalarProperty Name="resin_data_product_id" ColumnName="resin_data_product_id" />
-          <ScalarProperty Name="Salt_Split" ColumnName="Salt_Split" />
-          <ScalarProperty Name="price_cuft_resin" ColumnName="price_cuft_resin" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vessel_historical">
-      <EntityTypeMapping TypeName="rtitestModel.vessel_historical">
-        <MappingFragment StoreEntitySet="vessel_historical">
-          <ScalarProperty Name="sampleID" ColumnName="sampleID" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="lbs_chemical" ColumnName="lbs_chemical" />
-          <ScalarProperty Name="throughput" ColumnName="throughput" />
-          <ScalarProperty Name="num_regens" ColumnName="num_regens" />
-          <ScalarProperty Name="toc" ColumnName="toc" />
-          <ScalarProperty Name="vessel_historical_customerID" ColumnName="vessel_historical_customerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="water_data">
-      <EntityTypeMapping TypeName="rtitestModel.water_data">
+      <EntityTypeMapping TypeName="rtidevModel.water_data">
         <MappingFragment StoreEntitySet="water_data">
           <ScalarProperty Name="dataID" ColumnName="dataID" />
           <ScalarProperty Name="cond" ColumnName="cond" />
           <ScalarProperty Name="temp" ColumnName="temp" />
           <ScalarProperty Name="measurment_date" ColumnName="measurment_date" />
-          <ScalarProperty Name="sourceID" ColumnName="sourceID" />
+          <ScalarProperty Name="sourceid" ColumnName="sourceid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

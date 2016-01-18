@@ -18,6 +18,6 @@ namespace RTI.Database.Updater
         public Nullable<int> cond { get; set; }
         public Nullable<int> temp { get; set; }
         public string measurment_date { get; set; }
-        public Nullable<int> sourceID { get; set; }
+        public string sourceid { get; set; }
     }
 }
