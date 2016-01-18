@@ -98,7 +98,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>VrtH/HibRJrf8KmJLJe1+MAZbNOyhIC74btdid7uWGE=</dsig:DigestValue>
+        <dsig:DigestValue>4ffwoAoDXqVPdnPb8zBCbuZQW8eRIdWKKPoivPT1zGE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -111,13 +111,13 @@
       <dsig:DigestValue>TcAtTupvzU6ROgstk5g9OC2Yar2q5gI9GqriUdMwi38=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="RTI.Database.Updater.dll.exe.config" size="1960">
+  <file name="RTI.Database.Updater.dll.exe.config" size="1950">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>BliW5eYa/90WAC/iVNoHWKW4wpmQFqN3wbFzbgrOHlk=</dsig:DigestValue>
+      <dsig:DigestValue>wB8I9+ZO8kirsS3XVy+WNdSmBS3HMTP7cb7yRvINKxk=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

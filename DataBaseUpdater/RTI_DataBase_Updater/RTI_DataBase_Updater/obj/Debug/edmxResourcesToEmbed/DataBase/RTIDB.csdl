@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="rtitestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cond_archive">
+    <Key>
+      <PropertyRef Name="dataID" />
+    </Key>
+    <Property Name="dataID" Type="Int32" Nullable="false" />
+    <Property Name="cond" Type="Int32" />
+    <Property Name="temp" Type="Int32" />
+    <Property Name="measurment_date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="sourceID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="company" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="plant" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="acid_price" Type="Decimal" />
+    <Property Name="caustic_price" Type="Decimal" />
+    <Property Name="demand" Type="Int32" />
+    <Property Name="num_trains" Type="Int64" />
+    <Property Name="date_added" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="customer_water" Relationship="Self.fk_customer_water_customer1" FromRole="customer" ToRole="customer_water" />
+  </EntityType>
+  <EntityType Name="customer_water">
+    <Key>
+      <PropertyRef Name="customer_customerID" />
+      <PropertyRef Name="first_sourceID" />
+      <PropertyRef Name="second_sourceID" />
+    </Key>
+    <Property Name="customer_customerID" Type="Int64" Nullable="false" />
+    <Property Name="first_sourceID" Type="Int32" Nullable="false" />
+    <Property Name="second_sourceID" Type="Int32" Nullable="false" />
+    <Property Name="firstSourcePercentage" Type="Int32" />
+    <NavigationProperty Name="customer" Relationship="Self.fk_customer_water_customer1" FromRole="customer_water" ToRole="customer" />
+    <NavigationProperty Name="source" Relationship="Self.fk_customer_water_sources1" FromRole="customer_water" ToRole="sources" />
+    <NavigationProperty Name="source1" Relationship="Self.fk_customer_water_sources2" FromRole="customer_water" ToRole="sources" />
+  </EntityType>
+  <EntityType Name="resin_products">
+    <Key>
+      <PropertyRef Name="resin_product_id" />
+    </Key>
+    <Property Name="resin_product_id" Type="Int32" Nullable="false" />
+    <Property Name="manufacturer" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="model_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="resin_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="primary_type" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="group" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="teir" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="chemical_structure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="physical_structure" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="total_capacity" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="salt_split_CAP" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="price_per_cuft" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="vessels" Relationship="Self.fk_vessel_resin_products1" FromRole="resin_products" ToRole="vessel" />
+  </EntityType>
+  <EntityType Name="source">
+    <Key>
+      <PropertyRef Name="sources_sourceID" />
+    </Key>
+    <Property Name="sources_sourceID" Type="Int32" Nullable="false" />
+    <Property Name="river" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="country" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="region" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="measurement_location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="exact_lat" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="exact_lng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="street_number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="street_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="street_lat" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="street_lng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="feature_class" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="miles_from_site" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="post_code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="place_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="county_number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="county_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="state_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="agency" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="agency_id" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="full_site_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="unique_site_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="customer_water" Relationship="Self.fk_customer_water_sources1" FromRole="sources" ToRole="customer_water" />
+    <NavigationProperty Name="customer_water1" Relationship="Self.fk_customer_water_sources2" FromRole="sources" ToRole="customer_water" />
+  </EntityType>
+  <EntityType Name="train">
+    <Key>
+      <PropertyRef Name="trainID" />
+      <PropertyRef Name="customer_customerID" />
+    </Key>
+    <Property Name="trainID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="gpm" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="num_beds_cation" Type="Int32" />
+    <Property Name="num_beds_anion" Type="Int32" />
+    <Property Name="using_manifold" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="regens_per_month" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="regen_duration" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="has_mixed_bed" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="has_historical_data" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="customer_customerID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vessel">
+    <Key>
+      <PropertyRef Name="vesselID" />
+      <PropertyRef Name="train_trainID" />
+      <PropertyRef Name="resin_data_product_id" />
+    </Key>
+    <Property Name="vesselID" Type="Int32" Nullable="false" />
+    <Property Name="vessel_number" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="size" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="bed_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="lbs_chemical" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="date_replaced" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="replacement_plan" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="throughput" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="num_regens" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="toc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="with_degassifier" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="with_polisher" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="vessel_customerID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="train_trainID" Type="Int32" Nullable="false" />
+    <Property Name="resin_data_product_id" Type="Int32" Nullable="false" />
+    <Property Name="Salt_Split" Type="Double" />
+    <Property Name="price_cuft_resin" Type="Double" />
+    <NavigationProperty Name="resin_products" Relationship="Self.fk_vessel_resin_products1" FromRole="vessel" ToRole="resin_products" />
+  </EntityType>
+  <EntityType Name="vessel_historical">
+    <Key>
+      <PropertyRef Name="sampleID" />
+    </Key>
+    <Property Name="sampleID" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="lbs_chemical" Type="Int32" />
+    <Property Name="throughput" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="num_regens" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="toc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="vessel_historical_customerID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="water_data">
+    <Key>
+      <PropertyRef Name="dataID" />
+    </Key>
+    <Property Name="dataID" Type="Int32" Nullable="false" />
+    <Property Name="cond" Type="Int32" />
+    <Property Name="temp" Type="Int32" />
+    <Property Name="measurment_date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="sourceID" Type="Int32" />
+  </EntityType>
+  <Association Name="fk_customer_water_customer1">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="customer_water">
+        <PropertyRef Name="customer_customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_customer_water_sources1">
+    <End Role="sources" Type="Self.source" Multiplicity="1" />
+    <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sources">
+        <PropertyRef Name="sources_sourceID" />
+      </Principal>
+      <Dependent Role="customer_water">
+        <PropertyRef Name="first_sourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_customer_water_sources2">
+    <End Role="sources" Type="Self.source" Multiplicity="1" />
+    <End Role="customer_water" Type="Self.customer_water" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sources">
+        <PropertyRef Name="sources_sourceID" />
+      </Principal>
+      <Dependent Role="customer_water">
+        <PropertyRef Name="second_sourceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_vessel_resin_products1">
+    <End Role="resin_products" Type="Self.resin_products" Multiplicity="1" />
+    <End Role="vessel" Type="Self.vessel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="resin_products">
+        <PropertyRef Name="resin_product_id" />
+      </Principal>
+      <Dependent Role="vessel">
+        <PropertyRef Name="resin_data_product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RTIDBContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cond_archive" EntityType="Self.cond_archive" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="customer_water" EntityType="Self.customer_water" />
+    <EntitySet Name="resin_products" EntityType="Self.resin_products" />
+    <EntitySet Name="sources" EntityType="Self.source" />
+    <EntitySet Name="trains" EntityType="Self.train" />
+    <EntitySet Name="vessels" EntityType="Self.vessel" />
+    <EntitySet Name="vessel_historical" EntityType="Self.vessel_historical" />
+    <EntitySet Name="water_data" EntityType="Self.water_data" />
+    <AssociationSet Name="fk_customer_water_customer1" Association="Self.fk_customer_water_customer1">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="customer_water" EntitySet="customer_water" />
+    </AssociationSet>
+    <AssociationSet Name="fk_customer_water_sources1" Association="Self.fk_customer_water_sources1">
+      <End Role="sources" EntitySet="sources" />
+      <End Role="customer_water" EntitySet="customer_water" />
+    </AssociationSet>
+    <AssociationSet Name="fk_customer_water_sources2" Association="Self.fk_customer_water_sources2">
+      <End Role="sources" EntitySet="sources" />
+      <End Role="customer_water" EntitySet="customer_water" />
+    </AssociationSet>
+    <AssociationSet Name="fk_vessel_resin_products1" Association="Self.fk_vessel_resin_products1">
+      <End Role="resin_products" EntitySet="resin_products" />
+      <End Role="vessel" EntitySet="vessels" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
