@@ -63,12 +63,15 @@ namespace RTI.Database.Updater
         private List<water_data> ExtractData (StreamReader fileContents, string filePath)
         {
             Dictionary<DateTime, int> conductivity = new Dictionary<DateTime, int>();
-            DateTime date;
+            DateTime currentdate;
+            DateTime lastDate = new DateTime();
             int cond;
             List <water_data> data = new List<water_data>();
+            List<int> averageCond = new List<int>();
             char[] delimiter = new char[] { '\t' };
             int numHeaders = 2;
             bool isHeaderFound = false;
+            bool isFirstRow = true;
 
             try {
                 // Read the file line by line 
@@ -82,20 +85,32 @@ namespace RTI.Database.Updater
                         if ((!line.Contains("agency_cd") || !line.Contains("site_no") || !line.Contains("datetime")) && isHeaderFound)
                         {
                             var segments = line.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
-                            bool dateFormatOk = DateTime.TryParse(segments[dateCol], out date);
+                            bool dateFormatOk = DateTime.TryParse(segments[dateCol], out currentdate);
                             bool condFormatOk = int.TryParse(segments[condCol], out cond);
-                        
+                            averageCond.Add(cond);
+
+                            if (isFirstRow)
+                            {
+                                lastDate = currentdate;
+                                isFirstRow = false;
+                            }
+
                             if (dateFormatOk && condFormatOk)
                             {
-                                var todaysData = new water_data();
-                                todaysData.measurment_date = date.ToString("MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
-                                todaysData.cond = cond;
-                                todaysData.sourceid = segments[sourceCol];
+                                if (currentdate.Day != lastDate.Day)
+                                {
+                                    var todaysData = new water_data();
+                                    todaysData.measurment_date = currentdate.ToString("MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+                                    todaysData.cond = Convert.ToInt32(averageCond.Average());
+                                    todaysData.sourceid = segments[sourceCol];
 
-                                data.Add(todaysData);
+                                    data.Add(todaysData);
 
-                                //DEBUG
-                                Console.WriteLine("SouceID: " + todaysData.sourceid + "    Date: " + date + "    Cond: " + cond);
+                                    //DEBUG
+                                    Console.WriteLine("SouceID: " + todaysData.sourceid + "    Date: " + currentdate + "    Cond: " + cond);
+                                    averageCond.Clear();
+                                    lastDate = currentdate;
+                                }
                             }
                         }
                         else

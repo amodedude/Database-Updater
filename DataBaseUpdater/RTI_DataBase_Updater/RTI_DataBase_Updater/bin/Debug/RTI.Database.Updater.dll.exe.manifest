@@ -55,6 +55,18 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.MappingAPI.dll" size="35840">
+      <assemblyIdentity name="EntityFramework.MappingAPI" version="6.0.0.7" publicKeyToken="7EE2E825D201459E" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>mhSgcKBHVHKr0AFPbv7eWCpkpEH29ohK5MxgUVyomgA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.SqlServer.dll" size="621264">
       <assemblyIdentity name="EntityFramework.SqlServer" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -67,38 +79,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.dll" size="457216">
-      <assemblyIdentity name="MySql.Data" version="6.9.7.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.dll" size="457728">
+      <assemblyIdentity name="MySql.Data" version="6.9.8.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Glrei6GAe8HbvJIBGNBEWTg+dDds0IYH3b/trf/SHxo=</dsig:DigestValue>
+        <dsig:DigestValue>vZOt5pn+YIjqzABheL5YRnsrxRe1pFgyD4tfa0entVA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MySql.Data.Entity.EF6.dll" size="369664">
-      <assemblyIdentity name="MySql.Data.Entity.EF6" version="6.9.7.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="MySql.Data.Entity.EF6" version="6.9.8.0" publicKeyToken="C5687FC88969C44D" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vyrc8GKJBohjYOI4i9ce4Qw5Z2mADV22MgJM0LzN8So=</dsig:DigestValue>
+        <dsig:DigestValue>DrWYFlQQkhnuj161hYunI4scF7840L09iCV7kUlfr3M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RTI.Database.Updater.dll.exe" size="104960">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="RTI.Database.Updater.dll.exe" size="67584">
       <assemblyIdentity name="RTI.Database.Updater.dll" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4ffwoAoDXqVPdnPb8zBCbuZQW8eRIdWKKPoivPT1zGE=</dsig:DigestValue>
+        <dsig:DigestValue>RVq6789Jwq+jK8o+MTOLBt8C3wM44PR/zudlFwy/WOE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -111,13 +123,31 @@
       <dsig:DigestValue>TcAtTupvzU6ROgstk5g9OC2Yar2q5gI9GqriUdMwi38=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="RTI.Database.Updater.dll.exe.config" size="1950">
+  <file name="RTI.Database.Updater.dll.exe.config" size="2226">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>wB8I9+ZO8kirsS3XVy+WNdSmBS3HMTP7cb7yRvINKxk=</dsig:DigestValue>
+      <dsig:DigestValue>JhkqCGdFHQV4gt+7oUmPToyKHomXjnOMcpDzQKnXCeI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="RTIDB.Context.tt" size="22929">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+Idsl06TtTIABgq6rlbWrSmMGBz87jWZDo6GTkkhxkY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="RTIDB.tt" size="25274">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>vkHr6VsuGhjzIh8nmS1clA0BsWbVvrDPZvnABDrKyj0=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
