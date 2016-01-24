@@ -19,7 +19,7 @@ namespace RTI.DataBase.Application.Controllers
         {
             Console.Clear();
             ApplicationLog.InsertLineSeporator();
-            ApplicationLog.WriteMessageToLog("***Application Start****", true, true);
+            ApplicationLog.WriteMessageToLog("***Application Start****", true, true, true);
             ApplicationLog.InsertLineSeporator();
 
             if (start == "n" || start == "N") // Case No
@@ -46,7 +46,7 @@ namespace RTI.DataBase.Application.Controllers
         public void restart()
         {
             UserInterface.WriteToConsole("\nWould you like to re-start the RTI database updater? y/n");
-            ApplicationLog.WriteMessageToLog("***Application Re-Start****", true, true);
+            ApplicationLog.WriteMessageToLog("***Application Re-Start****", true, true, true);
             startApplication(UserInterface.ReadFromConsole());
         }
 

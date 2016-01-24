@@ -63,7 +63,7 @@ namespace RTI.DataBase.Application
         static void Application_ProcessExit(object sender, EventArgs e)
         {
             Console.WriteLine("Application Termintated.");
-            ApplicationLog.WriteMessageToLog("***Application Terminated****", true, true);          
+            ApplicationLog.WriteMessageToLog("***Application Terminated****", true, true, true);          
         }
     }
 }

@@ -27,7 +27,7 @@ namespace RTI.Database.Updater
 
             ConnectionString = result.First().ToString().TrimEnd('"').TrimStart('"');
             
-
+            // Manually commit to the database (no EF due to speed issues)
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -54,7 +54,7 @@ namespace RTI.Database.Updater
             }
             timer.Stop();
             Console.WriteLine("Upload Complteded in {0} seconds.\nPress any key to Continue...", timer.Elapsed.ToString());
-            ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.ToString() + " seconds.\nPress any key to Continue...", false, false);
+            ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.ToString() + " seconds.\n\n", false, false, true);
 
             //Debug:
             //Console.ReadKey();

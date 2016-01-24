@@ -61,7 +61,7 @@ namespace RTI.DataBase.Application
                         }
                         catch (Exception ex)
                         {
-                            ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true);
+                            ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                             System.Diagnostics.Debugger.Break();
                             UserInterface.WriteToConsole("\nError: Unable to download file {0} of {1}.\n\nSite ID = {2:N}, \nName = {3}", 
                                                           filesDownloaded+1, numberOfFilesToDownload, source.agency_id, source.full_site_name);
@@ -80,7 +80,7 @@ namespace RTI.DataBase.Application
             }
             catch (Exception ex)
             {
-                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true);
+                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                 System.Diagnostics.Debugger.Break();
                 Console.WriteLine(ex.Message);
                 throw ex;
@@ -124,7 +124,7 @@ namespace RTI.DataBase.Application
         private string download_file(string USGSID)
         {
             UserInterface.WriteToConsole("Downloading File with USGSID =  " + Convert.ToString(USGSID));
-            ApplicationLog.WriteMessageToLog("Downloading File with USGSID =  " + Convert.ToString(USGSID), true, true);
+            ApplicationLog.WriteMessageToLog("Downloading File with USGSID =  " + Convert.ToString(USGSID), true, false, false);
 
             download_finished = false;
             string full_file_path;

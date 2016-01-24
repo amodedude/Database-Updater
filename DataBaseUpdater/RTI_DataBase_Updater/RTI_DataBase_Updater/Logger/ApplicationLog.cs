@@ -12,13 +12,13 @@ namespace RTI.Database.Updater
         /// </summary>
         /// <param name="message"></param>
         /// <param name="includeDate"></param>
-        public static void WriteMessageToLog(string message, bool includeDate, bool useSeporators)
+        public static void WriteMessageToLog(string message, bool includeDate, bool useTopSeporator, bool useBottomSeporator)
         {
                 var fullPath = GetFullFilePath();
                 string formatedMessage = GenerateFormatedString(message);
 
                 if (VerifyLogFile(fullPath))
-                    InsertTextToLog(formatedMessage, fullPath, includeDate, useSeporators);
+                    InsertTextToLog(formatedMessage, fullPath, includeDate, useTopSeporator, useBottomSeporator);
         }
 
         /// <summary>
@@ -63,11 +63,11 @@ namespace RTI.Database.Updater
         /// <param name="message"></param>
         /// <param name="filePath"></param>
         /// <param name="includeDate"></param>
-        private static void InsertTextToLog(string message, Uri filePath, bool includeDate, bool includeSeporators)
+        private static void InsertTextToLog(string message, Uri filePath, bool includeDate, bool includeTopSeporator, bool includeBottomSeporator)
         {
             using (StreamWriter log = new StreamWriter(filePath.LocalPath, true))
             {
-                if (includeSeporators)
+                if (includeTopSeporator)
                 {
                     StringBuilder str = new StringBuilder();
                     for (int i = 0; i < fileWidth; i++)
@@ -87,10 +87,10 @@ namespace RTI.Database.Updater
                 }
                 else
                 {
-                    log.Write(message);
+                    log.Write(message + Environment.NewLine);
                 }
 
-                if (includeSeporators)
+                if (includeBottomSeporator)
                 {
                     StringBuilder str = new StringBuilder();
                     for (int i = 0; i < fileWidth; i++)
@@ -116,11 +116,11 @@ namespace RTI.Database.Updater
                 str.Append("-");
             }
 
-            str.Append(Environment.NewLine);
+            str.Append("\n");
 
             var fullPath = GetFullFilePath();
             if (VerifyLogFile(fullPath))
-                InsertTextToLog(str.ToString(), fullPath, false, false);
+                InsertTextToLog(str.ToString(), fullPath, false, false, false);
         }
 
 

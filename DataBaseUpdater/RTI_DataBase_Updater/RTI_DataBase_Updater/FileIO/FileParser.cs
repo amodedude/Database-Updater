@@ -31,7 +31,7 @@ namespace RTI.Database.Updater
         {
             try
             {
-                ApplicationLog.WriteMessageToLog("Opening File: " + filePath, true, true);
+                ApplicationLog.WriteMessageToLog("Opening File: " + filePath, false, false, false);
 
                 // Open the text file using a stream reader.
                 using (StreamReader sr = new StreamReader(filePath))
@@ -45,7 +45,7 @@ namespace RTI.Database.Updater
             }
             catch (Exception ex)
             {
-                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true);
+                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                 System.Diagnostics.Debugger.Break();
                 Console.WriteLine("There was an error reading this file: ");
                 Console.WriteLine(ex.Message);
@@ -128,6 +128,7 @@ namespace RTI.Database.Updater
                             }
                             else
                             {
+                                ApplicationLog.WriteMessageToLog("\nERROR: " + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".", false, false, true);
                                 Console.WriteLine("\n" + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".");
                                 break; // Stop reading the file uppon incorrect text format detection
                             }
@@ -138,7 +139,7 @@ namespace RTI.Database.Updater
             }
             catch(Exception ex)
             {
-                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true);
+                ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                 System.Diagnostics.Debugger.Break();
                 throw ex;
             }
