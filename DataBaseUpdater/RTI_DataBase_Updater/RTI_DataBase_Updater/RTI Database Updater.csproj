@@ -124,6 +124,7 @@
     <Compile Include="source.cs">
       <DependentUpon>RTIDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProgressBarcs.cs" />
     <Compile Include="water_data.cs">
       <DependentUpon>RTIDB.tt</DependentUpon>
     </Compile>
@@ -174,6 +175,7 @@
       <DependentUpon>RTIDB.edmx</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

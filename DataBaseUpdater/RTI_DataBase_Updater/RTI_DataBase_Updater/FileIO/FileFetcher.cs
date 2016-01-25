@@ -44,8 +44,10 @@ namespace RTI.DataBase.Application
 
                         Console.Clear();
                         double percentage = ((double)filesDownloaded / numberOfFilesToDownload);
+
+                        // TODO: Call total progress bar here.
                         UserInterface.WriteToConsole(
-                            "Progress:                                                      {0:P}" +
+                            "Total Progress:                                                      {0:P}" +
                             "\n--------------------------------------------------------------------" +
                             "\nDownloaded {1} file(s) out of {2}", percentage, filesDownloaded, numberOfFilesToDownload);
 
@@ -130,6 +132,7 @@ namespace RTI.DataBase.Application
             string full_file_path;
             using (var client = new WebClient())
             {
+                client.DownloadProgressChanged += Client_DownloadProgressChanged;
                 string USGS_URL = "http://nwis.waterdata.usgs.gov/nwis/uv?cb_00095=on&format=rdb&site_no=" + USGSID + "&period=1095";
                 Uri USGS_URI = new Uri(USGS_URL, UriKind.Absolute);
                 string file_name = USGSID + ".txt";
@@ -139,6 +142,11 @@ namespace RTI.DataBase.Application
             }
             download_finished = true;
             return full_file_path;
+        }
+
+        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+
         }
     }
 }
