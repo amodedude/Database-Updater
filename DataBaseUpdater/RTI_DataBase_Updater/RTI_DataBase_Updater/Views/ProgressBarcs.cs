@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RTI.DataBase.Application.FileIO;
+using RTI.DataBase.Application.UpdaterModel;
 
-namespace RTI.Database.Updater.Views
+namespace RTI.DataBase.Application.Views
 {
     /// <summary>
     /// Displays the progress of an 
-    /// opperation to the console. 
+    /// opperation to the console window. 
     /// </summary>
     class ProgressBar
     {
@@ -23,6 +21,11 @@ namespace RTI.Database.Updater.Views
         private long CompletedValue { get; set; }
         private long CurrentValue { get; set; }
         private readonly int LineNumber;
+
+        /// <summary>
+        /// Token flag used to reset the 
+        /// progress bar back to the starting value. 
+        /// </summary>
         public bool ReSet { get; set; } = false;
 
         /// <summary>
@@ -42,6 +45,12 @@ namespace RTI.Database.Updater.Views
         public int GetProgressBarLineNumber()
         {
             return LineNumber;
+        }
+
+        private void RefreshDisplay()
+        {
+            
+
         }
     }
 }

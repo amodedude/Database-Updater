@@ -1,6 +1,7 @@
 ﻿using System;
-using RTI.Database.Updater;
+using RTI.DataBase.Application.UpdaterModel;
 using RTI.DataBase.Application.Controllers;
+using RTI.DataBase.Application.Logger;
 
 namespace RTI.DataBase.Application
 {
@@ -62,7 +63,7 @@ namespace RTI.DataBase.Application
         /// <param name="e"></param>
         static void Application_ProcessExit(object sender, EventArgs e)
         {
-            Console.WriteLine("Application Termintated.");
+            UserInterface.WriteToConsole("Application Termintated.");
             ApplicationLog.WriteMessageToLog("***Application Terminated****", true, true, true);          
         }
     }

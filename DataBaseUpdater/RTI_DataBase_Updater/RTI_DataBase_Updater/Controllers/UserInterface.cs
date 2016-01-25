@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace RTI.DataBase.Application.Controllers
 {
@@ -6,8 +7,10 @@ namespace RTI.DataBase.Application.Controllers
     /// Custom read/write to console.
     /// utility class 
     /// </summary>
-    class UserInterface
+    static class UserInterface
     {
+        public static string OutputText { get; set; }
+        private static StringWriter ConsoleStringWriter = new StringWriter();
         /// <summary>
         /// Writes to the console.
         /// </summary>
@@ -17,10 +20,17 @@ namespace RTI.DataBase.Application.Controllers
         /// <param name="arg2"></param>
         public static void WriteToConsole(string message = "", object arg0 = null, object arg1 = null, object arg2 = null, object arg3 = null)
         {
-            if (message.Length > 0)
+            using (ConsoleStringWriter)
             {
-                Console.WriteLine(message,arg0, arg1, arg2, arg3);
+                Console.SetOut(ConsoleStringWriter);
+
+                if (message.Length > 0)
+                {
+                    Console.WriteLine(message, arg0, arg1, arg2, arg3);
+                }
+                OutputText = ConsoleStringWriter.ToString();
             }
+
         }
 
         /// <summary>

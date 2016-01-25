@@ -1,14 +1,15 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using RTI.DataBase.Application.Controllers;
+using RTI.DataBase.Application.UpdaterModel;
+using RTI.DataBase.Application.Logger;
 
-
-namespace RTI.Database.Updater
+namespace RTI.DataBase.Application.FileIO
 {
     /// <summary>
     /// Uploads retrieved data into the RTI database. 
@@ -53,7 +54,7 @@ namespace RTI.Database.Updater
                 connection.Close();
             }
             timer.Stop();
-            Console.WriteLine("Upload Complteded in {0} seconds.\nPress any key to Continue...", timer.Elapsed.ToString());
+            UserInterface.WriteToConsole("Upload Complteded in {0} seconds.\nPress any key to Continue...", timer.Elapsed.ToString());
             ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.ToString() + " seconds.\n\n", false, false, true);
 
             //Debug:

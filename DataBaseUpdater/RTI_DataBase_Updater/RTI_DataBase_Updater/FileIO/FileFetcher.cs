@@ -2,11 +2,13 @@
 using System.Net;
 using System.Linq;
 using System.Threading;
-using RTI.Database.Updater;
+using RTI.DataBase.Application.UpdaterModel;
 using System.Collections.Generic;
 using RTI.DataBase.Application.Controllers;
+using RTI.DataBase.Application.FileIO;
+using RTI.DataBase.Application.Logger;
 
-namespace RTI.DataBase.Application
+namespace RTI.DataBase.Application.FileIO
 {
     /// <summary>
     /// Handles downloading of USGS text files into the file repository.
@@ -84,7 +86,7 @@ namespace RTI.DataBase.Application
             {
                 ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                 System.Diagnostics.Debugger.Break();
-                Console.WriteLine(ex.Message);
+                UserInterface.WriteToConsole(ex.Message);
                 throw ex;
             }
         }

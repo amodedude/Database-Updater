@@ -3,9 +3,11 @@ using System.IO;
 using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
+using RTI.DataBase.Application.Controllers;
+using RTI.DataBase.Application.Logger;
+using RTI.DataBase.Application.UpdaterModel;
 
-
-namespace RTI.Database.Updater
+namespace RTI.DataBase.Application.FileIO
 {
     /// <summary>
     /// Handles reading of downloaded files. 
@@ -47,8 +49,8 @@ namespace RTI.Database.Updater
             {
                 ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                 System.Diagnostics.Debugger.Break();
-                Console.WriteLine("There was an error reading this file: ");
-                Console.WriteLine(ex.Message);
+                UserInterface.WriteToConsole("There was an error reading this file: ");
+                UserInterface.WriteToConsole(ex.Message);
             }
         }
 
@@ -107,7 +109,7 @@ namespace RTI.Database.Updater
                                     data.Add(todaysData);
 
                                     //DEBUG
-                                    Console.WriteLine("SouceID: " + todaysData.sourceid + "    Date: " + currentdate + "    Cond: " + cond);
+                                    UserInterface.WriteToConsole("SouceID: " + todaysData.sourceid + "    Date: " + currentdate + "    Cond: " + cond);
                                     averageCond.Clear();
                                     lastDate = currentdate;
                                 }
@@ -129,7 +131,7 @@ namespace RTI.Database.Updater
                             else
                             {
                                 ApplicationLog.WriteMessageToLog("\nERROR: " + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".", false, false, true);
-                                Console.WriteLine("\n" + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".");
+                                UserInterface.WriteToConsole("\n" + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".");
                                 break; // Stop reading the file uppon incorrect text format detection
                             }
                         }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using RTI.DataBase.Application.Controllers;
+using System;
 using System.IO;
 using System.Text;
 
-namespace RTI.Database.Updater
+namespace RTI.DataBase.Application.Logger
 {
     static class ApplicationLog
     {
@@ -143,7 +144,7 @@ namespace RTI.Database.Updater
                     return true;
                 else
                 {
-                    Console.WriteLine("Warning, Unable to create log file in " + path.LocalPath + ".\nNo Logs will be written. \nPress any key to continue...");
+                    UserInterface.WriteToConsole("Warning, Unable to create log file in " + path.LocalPath + ".\nNo Logs will be written. \nPress any key to continue...");
                     return false;
                 }
             }
