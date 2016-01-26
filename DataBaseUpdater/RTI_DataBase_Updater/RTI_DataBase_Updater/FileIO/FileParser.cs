@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using RTI.DataBase.Application.Controllers;
 using RTI.DataBase.Application.Logger;
 using RTI.DataBase.Application.UpdaterModel;
+using System.Threading;
 
 namespace RTI.DataBase.Application.FileIO
 {
@@ -109,7 +110,7 @@ namespace RTI.DataBase.Application.FileIO
                                     data.Add(todaysData);
 
                                     //DEBUG
-                                    UserInterface.WriteToConsole("SouceID: " + todaysData.sourceid + "    Date: " + currentdate + "    Cond: " + cond);
+                                    //UserInterface.WriteToConsole("SouceID: " + todaysData.sourceid + "    Date: " + currentdate + "    Cond: " + cond);
                                     averageCond.Clear();
                                     lastDate = currentdate;
                                 }
@@ -131,7 +132,8 @@ namespace RTI.DataBase.Application.FileIO
                             else
                             {
                                 ApplicationLog.WriteMessageToLog("\nERROR: " + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".", false, false, true);
-                                UserInterface.WriteToConsole("\n" + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".");
+                                //UserInterface.WriteToConsole("\n" + filePath + " is not formated properly. \nThis file and it's contents will not be parsed from line " + Convert.ToString(CurrentLineNumber) + ".");
+                                //Thread.Sleep(3000);
                                 break; // Stop reading the file uppon incorrect text format detection
                             }
                         }

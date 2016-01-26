@@ -2,6 +2,7 @@
 using RTI.DataBase.Application.UpdaterModel;
 using RTI.DataBase.Application.Controllers;
 using RTI.DataBase.Application.Logger;
+using System.Text;
 
 namespace RTI.DataBase.Application
 {
@@ -13,24 +14,24 @@ namespace RTI.DataBase.Application
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(Application_ProcessExit);
-            //SetUpWindow(ConsoleColor.Green, 1, 1);
-            string welcomeMessage =
-             "\n ---------------------------------------------------------------------\n"
-              +   "              Recirculation Technologies, LLC 2015"
-              + "\n ---------------------------------------------------------------------\n" 
-              + "\n                Welcome to the RTI Database Updater."  
-              + "\n\n This application will run continuously and make updates to the RTI\n"
-              + " database's water-data table located on the RTI server. The application\n"
-              + " will update the database \n with the latest conductivity information\n"
-              + " taken from the USGS website.";
+                AppDomain.CurrentDomain.ProcessExit += new EventHandler(Application_ProcessExit);
+                //SetUpWindow(ConsoleColor.Green, 1, 1);
+                string welcomeMessage =
+                 "\n ---------------------------------------------------------------------\n"
+                  + "              Recirculation Technologies, LLC 2015"
+                  + "\n ---------------------------------------------------------------------\n"
+                  + "\n                Welcome to the RTI Database Updater."
+                  + "\n\n This application will run continuously and make updates to the RTI\n"
+                  + " database's water-data table located on the RTI server. The application\n"
+                  + " will update the database \n with the latest conductivity information\n"
+                  + " taken from the USGS website.";
 
-            UserInterface.WriteToConsole(welcomeMessage);
-            //SetUpWindow(ConsoleColor.White, 1, 1);
+                UserInterface.WriteToConsole(welcomeMessage);
+                //SetUpWindow(ConsoleColor.White, 1, 1);
 
-            UserInterface.WriteToConsole("\nAre you ready to run the RTI database updater? y/n");
-            MenuController start = new MenuController();
-            start.startApplication(UserInterface.ReadFromConsole());
+                UserInterface.WriteToConsole("\n\nAre you ready to run the RTI database updater? y/n");
+                MenuController start = new MenuController();
+                start.startApplication(UserInterface.ReadFromConsole());
         }
 
         /// <summary>

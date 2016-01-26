@@ -17,7 +17,7 @@ namespace RTI.DataBase.Application.Controllers
         /// <param name="start"></param>
         public void startApplication(string start)
         {
-            Console.Clear();
+            UserInterface.ClearUI();
             ApplicationLog.InsertLineSeporator();
             ApplicationLog.WriteMessageToLog("***Application Start****", true, true, true);
             ApplicationLog.InsertLineSeporator();
@@ -108,7 +108,7 @@ namespace RTI.DataBase.Application.Controllers
                 {
                     fileFetcher.Pause();
                     UserInterface.WriteToConsole("\n\nDo you want to stop the current process? \nType s to stop or c to continue.");
-                    string input = Console.ReadLine();
+                    string input = UserInterface.ReadFromConsole();
                     if (input == "c" || input == "C")
                     {
                         fileFetcher.Resume();

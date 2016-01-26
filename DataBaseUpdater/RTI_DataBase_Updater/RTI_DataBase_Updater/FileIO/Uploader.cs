@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using RTI.DataBase.Application.Controllers;
 using RTI.DataBase.Application.UpdaterModel;
 using RTI.DataBase.Application.Logger;
+using System.Threading;
 
 namespace RTI.DataBase.Application.FileIO
 {
@@ -54,8 +55,9 @@ namespace RTI.DataBase.Application.FileIO
                 connection.Close();
             }
             timer.Stop();
-            UserInterface.WriteToConsole("Upload Complteded in {0} seconds.\nPress any key to Continue...", timer.Elapsed.ToString());
-            ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.ToString() + " seconds.\n\n", false, false, true);
+            UserInterface.WriteToConsole("\nUpload Complteded in {0} ms.", timer.Elapsed.Milliseconds.ToString());
+            ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.Milliseconds.ToString() + " ms.\n\n", false, false, true);
+            Thread.Sleep(1200);
 
             //Debug:
             //Console.ReadKey();
