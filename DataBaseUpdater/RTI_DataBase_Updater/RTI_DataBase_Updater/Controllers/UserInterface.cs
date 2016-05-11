@@ -74,7 +74,12 @@ namespace RTI.DataBase.Application.Controllers
                     lineNumber++;
                 }
                 StartingPosition += (lineNumber-3);
+
+                // Ensure index always remains positive. 
+                StartingPosition = StartingPosition < 0 ? 0 : StartingPosition;
+
                 int numCharToRemove = UiArray.Last().Length;
+                numCharToRemove = numCharToRemove <= 0 ? -1 : numCharToRemove;
                 string output = UiString.Remove(StartingPosition, numCharToRemove+1).ToString();
                 return output;
             }

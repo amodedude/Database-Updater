@@ -30,12 +30,20 @@ namespace RTI.DataBase.Application.Controllers
             else if (start == "y" || start == "Y") // Case Yes
             {
                 UserInterface.WriteToConsole("\n\nPress the 'Esc' key at any time to exit.");
-                runNewUpdater(); // Start the updater 
+                try {
+                    runNewUpdater(); // Start the updater 
+                }
+                catch (Exception ex)
+                {
+                    UserInterface.WriteToConsole("Error: Database updater appliction experianced a fatal exception. ");
+                    UserInterface.WriteToConsole("\nWould you like to restart the RTI database updater? y/n");
+                    startApplication(UserInterface.ReadFromConsole());
+                }
             }
             else // Case Error
             {
                 UserInterface.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
-                UserInterface.WriteToConsole("\nWould you like to run the RTI database updater? y/n");
+                UserInterface.WriteToConsole("\nWould you like to restart the RTI database updater? y/n");
                 startApplication(UserInterface.ReadFromConsole());
             }
         }

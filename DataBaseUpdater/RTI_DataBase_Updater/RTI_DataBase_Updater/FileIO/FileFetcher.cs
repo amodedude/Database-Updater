@@ -69,7 +69,7 @@ namespace RTI.DataBase.Application.FileIO
                                 string folder_path = @"C:\Users\John\Desktop\RTI File Repository\";
                                 string filePath = folder_path + file_name;
                                 await download_file(USGSID, filePath); // Fetch the file
-                                parseFile.ReadFile(filePath); // Read the fetched file contents 
+                                parseFile.ReadFile(filePath, USGSID); // Read the fetched file contents 
                             }
                             catch (Exception ex)
                             {
@@ -93,7 +93,7 @@ namespace RTI.DataBase.Application.FileIO
             catch (Exception ex)
             {
                 ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
-                System.Diagnostics.Debugger.Break();
+                //System.Diagnostics.Debugger.Break();
                 //UserInterface.WriteToConsole(ex.Message);
                 throw ex;
             }

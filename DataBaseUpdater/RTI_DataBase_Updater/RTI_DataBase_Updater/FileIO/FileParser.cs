@@ -19,18 +19,18 @@ namespace RTI.DataBase.Application.FileIO
         /// Initializes the file read opperation. 
         /// </summary>
         /// <param name="filePath"></param>
-        public void ReadFile(string filePath)
+        public void ReadFile(string filePath, string USGSID)
         {
             CurrentLineNumber = 0;
             if (File.Exists(filePath))
-                OpenFile(filePath);
+                OpenFile(filePath, USGSID);
         }
 
         /// <summary>
         /// Opens the file to be read. 
         /// </summary>
         /// <param name="filePath"></param>
-        private void OpenFile(string filePath)
+        private void OpenFile(string filePath, string USGSID)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace RTI.DataBase.Application.FileIO
                     var data = ExtractData(sr, filePath);
                     Uploader rtiUploader = new Uploader();
                     if(data.Count() > 0) // Only upload if there is data to be uploaded. 
-                        rtiUploader.Upload(data);
+                        rtiUploader.Upload(data, USGSID);
                 }
             }
             catch (Exception ex)

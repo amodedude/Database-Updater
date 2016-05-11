@@ -9,6 +9,7 @@ using RTI.DataBase.Application.Controllers;
 using RTI.DataBase.Application.UpdaterModel;
 using RTI.DataBase.Application.Logger;
 using System.Threading;
+using System;
 
 namespace RTI.DataBase.Application.FileIO
 {
@@ -17,7 +18,7 @@ namespace RTI.DataBase.Application.FileIO
     /// </summary>
     class Uploader
     {
-        public void Upload(List<water_data> data)
+        public void Upload(List<water_data> data, string USGSID)
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
@@ -32,27 +33,40 @@ namespace RTI.DataBase.Application.FileIO
             // Manually commit to the database (no EF due to speed issues)
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
-                connection.Open();
-                List<string> Rows = new List<string>();
-
-                foreach (var chunk in splitData)
+                try
                 {
-                    StringBuilder sCommand = new StringBuilder("INSERT INTO water_data (cond, temp, measurment_date, sourceid) VALUES ");
-                    foreach (var date in chunk)
-                    {
-                        Rows.Add(string.Format("({0}, {1}, '{2}', '{3}')", MySqlHelper.EscapeString(date.cond.ToString()), MySqlHelper.EscapeString("NULL"), MySqlHelper.EscapeString(date.measurment_date), MySqlHelper.EscapeString(date.sourceid)));
-                    }
-                    sCommand.Append(string.Join(",", Rows));
-                    sCommand.Append(";");
-                    string query = sCommand.ToString();
+                    connection.Open();
+                    List<string> Rows = new List<string>();
 
-                    using (MySqlCommand myCmd = new MySqlCommand(sCommand.ToString(), connection))
+                    // Retrieve the timestamp for the last avalible conductivity datapoint.
+                    if (data.Last().measurment_date <= RetrieveLatestDate(connection, USGSID))
+
+
+                    foreach (var chunk in splitData)
                     {
-                        myCmd.CommandType = CommandType.Text;
-                        myCmd.ExecuteNonQuery();
+                        StringBuilder sCommand = new StringBuilder("INSERT INTO water_data (cond, temp, measurment_date, sourceid) VALUES ");
+                        foreach (var date in chunk)
+                        {
+                            Rows.Add(string.Format("({0}, {1}, '{2}', '{3}')", MySqlHelper.EscapeString(date.cond.ToString()), MySqlHelper.EscapeString("NULL"), MySqlHelper.EscapeString(date.measurment_date), MySqlHelper.EscapeString(date.sourceid)));
+                        }
+                        sCommand.Append(string.Join(",", Rows));
+                        sCommand.Append(";");
+
+                        using (MySqlCommand myCmd = new MySqlCommand(sCommand.ToString(), connection))
+                        {
+                            myCmd.CommandType = CommandType.Text;
+                            myCmd.ExecuteNonQuery();
+                        }
                     }
+                    connection.Close();
                 }
-                connection.Close();
+                catch(MySqlException ex)
+                {
+                    Debugger.Break();
+                    ApplicationLog.WriteMessageToLog("ERROR: In Uploader(), There was an error connecting to the database, please check that your connection settings are valid.\n" + ex.Message, true, true, true);
+                }
+
+                
             }
             timer.Stop();
             UserInterface.WriteToConsole("\nUpload Complteded in {0} ms.", timer.Elapsed.Milliseconds.ToString());
@@ -62,6 +76,37 @@ namespace RTI.DataBase.Application.FileIO
             //Debug:
             //Console.ReadKey();
         }     
+
+        /// <summary>
+        /// Retrieves the date for the latest
+        /// conductivity entry in the RTI database
+        /// water_data table. 
+        /// </summary>
+        internal DateTime RetrieveLatestDate(MySqlConnection connection, string USGSID)
+        {
+            try
+            {
+                DateTime date = new DateTime();
+                if (connection.State == ConnectionState.Open)
+                {
+                    StringBuilder sCommand = new StringBuilder("SELECT * FROM water_data ORDER BY 1 DESC LIMIT 1 WHERE SOURCEID=");
+                    sCommand.Append((USGSID + ";"));
+                    string query = sCommand.ToString();
+
+                    using (MySqlCommand cmd = new MySqlCommand(sCommand.ToString(), connection))
+                    {
+                        var lastDate = cmd.ExecuteScalar();
+                    }
+                }
+                return date;
+            }
+            catch(Exception ex)
+            {
+                Debugger.Break();
+                ApplicationLog.WriteMessageToLog("ERROR: In RetrieveLatestDate(), There was an error retrieving data from the database.\n" + ex.Message, true, true, true);
+                throw ex;
+            }
+        }
     }
 
     static class SplitList

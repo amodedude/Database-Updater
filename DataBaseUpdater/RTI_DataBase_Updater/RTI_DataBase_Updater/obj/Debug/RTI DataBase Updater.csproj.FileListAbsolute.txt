@@ -15,3 +15,4 @@ C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_
 C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI.Database.Updater.dll.application
 C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI.Database.Updater.dll.exe
 C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI.Database.Updater.dll.pdb
+C:\Users\John\Desktop\Database-Updater\DataBaseUpdater\RTI_DataBase_Updater\RTI_DataBase_Updater\obj\Debug\RTI Database Updater.csprojResolveAssemblyReference.cache
