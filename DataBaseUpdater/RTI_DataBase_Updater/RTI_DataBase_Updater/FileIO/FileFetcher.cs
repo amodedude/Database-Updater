@@ -2,12 +2,10 @@
 using System.Net;
 using System.Linq;
 using System.Threading;
-using RTI.DataBase.Application.UpdaterModel;
 using System.Collections.Generic;
 using RTI.DataBase.Application.Controllers;
-using RTI.DataBase.Application.FileIO;
+using RTI.Database.Updater;
 using RTI.DataBase.Application.Logger;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RTI.DataBase.Application.FileIO
@@ -95,6 +93,10 @@ namespace RTI.DataBase.Application.FileIO
                 ApplicationLog.WriteMessageToLog("Error: " + ex.Message + " Inner" + ex.InnerException, true, true, true);
                 //System.Diagnostics.Debugger.Break();
                 //UserInterface.WriteToConsole(ex.Message);
+                EmailService emailService = new EmailService();
+                List<string> address = new List<string>();
+                address.Add("amodedude@gmail.com");
+                emailService.SendMail(address, "RTI Alert: Error in Database Updater Application", "An Error has occured in the Database Updater Application FileFetcher. \n\nError: \n\n"+ex.ToString());
                 throw ex;
             }
         }

@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RTI.DataBase.Application.UpdaterModel
+namespace RTI.Database.Updater
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class rtidevEntities : DbContext
     {
         public rtidevEntities()

@@ -36,7 +36,7 @@
     <Property Name="dataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="cond" Type="Int32" />
     <Property Name="temp" Type="Int32" />
-    <Property Name="measurment_date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="measurment_date" Type="DateTime" />
     <Property Name="sourceid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityContainer Name="rtidevEntities" annotation:LazyLoadingEnabled="true">

@@ -6,10 +6,10 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using RTI.DataBase.Application.Controllers;
-using RTI.DataBase.Application.UpdaterModel;
 using RTI.DataBase.Application.Logger;
 using System.Threading;
 using System;
+using RTI.Database.Updater;
 
 namespace RTI.DataBase.Application.FileIO
 {
@@ -18,8 +18,10 @@ namespace RTI.DataBase.Application.FileIO
     /// </summary>
     class Uploader
     {
-        public void Upload(List<water_data> data, string USGSID)
+        public bool Upload(List<water_data> data, string USGSID)
         {
+            bool data_uploaded = false;
+            bool isError = false;
             Stopwatch timer = new Stopwatch();
             timer.Start();
             // Split the datalist into chucks to significantly increase insert performance. 
@@ -39,42 +41,57 @@ namespace RTI.DataBase.Application.FileIO
                     List<string> Rows = new List<string>();
 
                     // Retrieve the timestamp for the last avalible conductivity datapoint.
-                    if (data.Last().measurment_date <= RetrieveLatestDate(connection, USGSID))
+                    var latest_dataset_date = data.Last().measurment_date;
+                    var latest_database_date = RetrieveLatestDate(connection, USGSID).Date;
 
-
-                    foreach (var chunk in splitData)
+                    if (latest_database_date < latest_dataset_date)
                     {
-                        StringBuilder sCommand = new StringBuilder("INSERT INTO water_data (cond, temp, measurment_date, sourceid) VALUES ");
-                        foreach (var date in chunk)
+                        foreach (var chunk in splitData)
                         {
-                            Rows.Add(string.Format("({0}, {1}, '{2}', '{3}')", MySqlHelper.EscapeString(date.cond.ToString()), MySqlHelper.EscapeString("NULL"), MySqlHelper.EscapeString(date.measurment_date), MySqlHelper.EscapeString(date.sourceid)));
-                        }
-                        sCommand.Append(string.Join(",", Rows));
-                        sCommand.Append(";");
+                            StringBuilder sCommand = new StringBuilder("INSERT INTO water_data (cond, temp, measurment_date, sourceid) VALUES ");
+                            foreach (var date in chunk)
+                            {
+                                if(date.measurment_date > latest_database_date)
+                                    Rows.Add(string.Format("({0}, {1}, '{2}', '{3}')", MySqlHelper.EscapeString(date.cond.ToString()), MySqlHelper.EscapeString("NULL"), MySqlHelper.EscapeString(date.measurment_date.GetValueOrDefault().ToString("yyyy-MM-dd HH':'mm':'ss", System.Globalization.CultureInfo.InvariantCulture)), MySqlHelper.EscapeString(date.sourceid)));
+                            }
+                            if (Rows.Count > 0) 
+                            {
+                                sCommand.Append(string.Join(",", Rows));
+                                sCommand.Append(";");
 
-                        using (MySqlCommand myCmd = new MySqlCommand(sCommand.ToString(), connection))
-                        {
-                            myCmd.CommandType = CommandType.Text;
-                            myCmd.ExecuteNonQuery();
+                                using (MySqlCommand myCmd = new MySqlCommand(sCommand.ToString(), connection))
+                                {
+                                    myCmd.CommandType = CommandType.Text;
+                                    myCmd.ExecuteNonQuery();
+                                    data_uploaded = true;
+                                }
+                            }
                         }
                     }
                     connection.Close();
                 }
                 catch(MySqlException ex)
                 {
+                    isError = true;
                     Debugger.Break();
+                    UserInterface.WriteToConsole("\nERROR: The system encountered an error, no data was uploaded for source " + USGSID);
                     ApplicationLog.WriteMessageToLog("ERROR: In Uploader(), There was an error connecting to the database, please check that your connection settings are valid.\n" + ex.Message, true, true, true);
-                }
-
-                
+                }             
             }
             timer.Stop();
-            UserInterface.WriteToConsole("\nUpload Complteded in {0} ms.", timer.Elapsed.Milliseconds.ToString());
-            ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.Milliseconds.ToString() + " ms.\n\n", false, false, true);
-            Thread.Sleep(1200);
 
-            //Debug:
-            //Console.ReadKey();
+            if (data_uploaded && !isError)
+            {
+                UserInterface.WriteToConsole("\nUpload Complteded in {0} ms.", timer.Elapsed.Milliseconds.ToString());
+                ApplicationLog.WriteMessageToLog("Upload Complteded in " + timer.Elapsed.Milliseconds.ToString() + " ms.\n\n", false, false, true);
+            }
+            else if(!isError && !data_uploaded)
+            {
+                UserInterface.WriteToConsole("\nDatabase is up to date for source " + USGSID);
+                ApplicationLog.WriteMessageToLog("No data uploaded, source is up to date for USGSID " + USGSID + "\n\n", false, false, true);
+            }
+            Thread.Sleep(1200);
+            return data_uploaded;
         }     
 
         /// <summary>
@@ -89,13 +106,13 @@ namespace RTI.DataBase.Application.FileIO
                 DateTime date = new DateTime();
                 if (connection.State == ConnectionState.Open)
                 {
-                    StringBuilder sCommand = new StringBuilder("SELECT * FROM water_data ORDER BY 1 DESC LIMIT 1 WHERE SOURCEID=");
+                    StringBuilder sCommand = new StringBuilder("SELECT MAX(measurment_date) FROM water_data WHERE sourceID = ");
                     sCommand.Append((USGSID + ";"));
                     string query = sCommand.ToString();
 
                     using (MySqlCommand cmd = new MySqlCommand(sCommand.ToString(), connection))
                     {
-                        var lastDate = cmd.ExecuteScalar();
+                        date = (DateTime)cmd.ExecuteScalar();
                     }
                 }
                 return date;
@@ -104,6 +121,10 @@ namespace RTI.DataBase.Application.FileIO
             {
                 Debugger.Break();
                 ApplicationLog.WriteMessageToLog("ERROR: In RetrieveLatestDate(), There was an error retrieving data from the database.\n" + ex.Message, true, true, true);
+                RTI.Database.Updater.EmailService emailAlert= new Database.Updater.EmailService();
+                List<string> address = new List<string>();
+                address.Add("amodedude@gmail.com");
+                emailAlert.SendMail(address, "RTI Alert Testing", "This is a test from the RTI database updater application.");
                 throw ex;
             }
         }

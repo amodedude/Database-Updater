@@ -33,7 +33,7 @@ namespace RTI.DataBase.Application.Controllers
                 try {
                     runNewUpdater(); // Start the updater 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     UserInterface.WriteToConsole("Error: Database updater appliction experianced a fatal exception. ");
                     UserInterface.WriteToConsole("\nWould you like to restart the RTI database updater? y/n");

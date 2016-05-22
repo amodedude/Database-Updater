@@ -1,8 +1,6 @@
 ﻿using System;
-using RTI.DataBase.Application.UpdaterModel;
 using RTI.DataBase.Application.Controllers;
 using RTI.DataBase.Application.Logger;
-using System.Text;
 
 namespace RTI.DataBase.Application
 {
@@ -31,7 +29,7 @@ namespace RTI.DataBase.Application
 
                 UserInterface.WriteToConsole("\n\nAre you ready to run the RTI database updater? y/n");
                 MenuController start = new MenuController();
-                start.startApplication(UserInterface.ReadFromConsole());
+                start.startApplication(UserInterface.ReadFromConsole(true));
         }
 
         /// <summary>

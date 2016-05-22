@@ -34,13 +34,22 @@ namespace RTI.DataBase.Application.Controllers
         }
 
         /// <summary>
-        /// Reads user input from the console window. 
+        /// Reads user input from the console window.
         /// </summary>
-        /// <returns></returns>
-        public static string ReadFromConsole()
+        /// <param name="readkey"></param>
+        /// <returns>Input String</returns>
+        public static string ReadFromConsole(bool readkey = false)
         {
-            string input = Console.ReadLine();
-            return input;
+            if (!readkey)
+            {
+                string input = Console.ReadLine();
+                return input;
+            }
+            else
+            {
+                var input = Console.ReadKey();
+                return input.KeyChar.ToString();
+            }
         }
 
         /// <summary>

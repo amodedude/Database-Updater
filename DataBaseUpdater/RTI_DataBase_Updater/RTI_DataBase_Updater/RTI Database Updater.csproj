@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailService.cs" />
     <Compile Include="Logger\ApplicationLog.cs" />
     <Compile Include="ApplicationStart.cs" />
     <Compile Include="FileIO\Uploader.cs" />

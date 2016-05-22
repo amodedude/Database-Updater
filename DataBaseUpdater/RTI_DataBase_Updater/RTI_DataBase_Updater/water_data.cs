@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RTI.DataBase.Application.UpdaterModel
+namespace RTI.Database.Updater
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace RTI.DataBase.Application.UpdaterModel
         public int dataID { get; set; }
         public Nullable<int> cond { get; set; }
         public Nullable<int> temp { get; set; }
-        public string measurment_date { get; set; }
+        public Nullable<System.DateTime> measurment_date { get; set; }
         public string sourceid { get; set; }
     }
 }

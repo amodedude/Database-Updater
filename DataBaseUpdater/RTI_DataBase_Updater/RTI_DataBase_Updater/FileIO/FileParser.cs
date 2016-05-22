@@ -5,8 +5,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using RTI.DataBase.Application.Controllers;
 using RTI.DataBase.Application.Logger;
-using RTI.DataBase.Application.UpdaterModel;
-using System.Threading;
+using RTI.Database.Updater;
 
 namespace RTI.DataBase.Application.FileIO
 {
@@ -103,7 +102,7 @@ namespace RTI.DataBase.Application.FileIO
                                 if (currentdate.Day != lastDate.Day)
                                 {
                                     var todaysData = new water_data();
-                                    todaysData.measurment_date = currentdate.ToString("MM/dd/yyyy HH:mm", CultureInfo.InvariantCulture);
+                                    todaysData.measurment_date = currentdate;
                                     todaysData.cond = Convert.ToInt32(averageCond.Average());
                                     todaysData.sourceid = segments[sourceCol];
 
