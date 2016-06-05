@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using RTI.DataBase.Application.Logger;
 using RTI.DataBase.Application.FileIO;
+using RTI.Database.Updater.Util;
+using System.Collections.Generic;
 
 namespace RTI.DataBase.Application.Controllers
 {
@@ -21,28 +23,33 @@ namespace RTI.DataBase.Application.Controllers
             ApplicationLog.InsertLineSeporator();
             ApplicationLog.WriteMessageToLog("***Application Start****", true, true, true);
             ApplicationLog.InsertLineSeporator();
-
-            if (start == "n" || start == "N") // Case No
+            try
             {
-                UserInterface.WriteToConsole("Do you want to exit?  y/n");
-                exitApplication(UserInterface.ReadFromConsole(true));
-            }
-            else if (start == "y" || start == "Y") // Case Yes
-            {
-                UserInterface.WriteToConsole("\n\nPress the 'Esc' key at any time to exit.");
-                try {
-                    runNewUpdater(); // Start the updater 
-                }
-                catch (Exception)
+                if (start.ToUpper() == "N") // Case No
                 {
-                    UserInterface.WriteToConsole("Error: Database updater appliction experianced a fatal exception. ");
+                    UserInterface.WriteToConsole("Do you want to exit?  y/n");
+                    exitApplication(UserInterface.ReadFromConsole(true));
+                }
+                else if (start.ToUpper() == "Y") // Case Yes
+                {
+                    UserInterface.WriteToConsole("\n\nPress the 'Esc' key at any time to exit.");
+                    runNewUpdater(); // Start the updater 
+                
+                }
+                else // Case Error
+                {
+                    UserInterface.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
                     UserInterface.WriteToConsole("\nWould you like to restart the RTI database updater? y/n");
                     startApplication(UserInterface.ReadFromConsole());
                 }
             }
-            else // Case Error
+            catch (Exception e)
             {
-                UserInterface.WriteToConsole("Error: Unkonwn input string. Please Try Again.");
+                EmailService email = new EmailService();
+                List<string> emailAdressList = new List<string>();
+                emailAdressList.Add("amodedude@gmail.com");
+                email.SendMail(emailAdressList, "RTI Database Updater Critical System Alert", "The database updater has encountered a fatal error. \r\n\r\nExeption message: \r\n" + e.Message + "\r\n\r\nInner Exception: \r\n" + e.InnerException + "\r\nPlease contact your system administrator immediately.\r\nSystem Time Stamp: " + DateTime.Now.ToString());
+                UserInterface.WriteToConsole("Error: Database updater appliction experianced a fatal exception. ");
                 UserInterface.WriteToConsole("\nWould you like to restart the RTI database updater? y/n");
                 startApplication(UserInterface.ReadFromConsole());
             }
@@ -53,9 +60,20 @@ namespace RTI.DataBase.Application.Controllers
         /// </summary>
         public void restart()
         {
-            UserInterface.WriteToConsole("\nWould you like to re-start the RTI database updater? y/n");
-            ApplicationLog.WriteMessageToLog("***Application Re-Start****", true, true, true);
-            startApplication(UserInterface.ReadFromConsole());
+            if (App.Settings.Mode.ToUpper() == "Manual")
+            {
+                UserInterface.WriteToConsole("\nWould you like to re-start the RTI database updater? y/n");
+                ApplicationLog.WriteMessageToLog("***Application Re-Start****", true, true, true);
+                startApplication(UserInterface.ReadFromConsole());
+            }
+            else
+            {
+                // Start a new timer and force restart after time expires:
+                RTI_Timer timer = new RTI_Timer();
+                timer.StartTimer();
+                while (TimerSettings.TimerFinished) { /*NOOP*/ }
+                startApplication("Y"); // Bypass user input
+            }
         }
 
         /// <summary>
@@ -64,13 +82,13 @@ namespace RTI.DataBase.Application.Controllers
         /// <param name="exit"></param>
         public void exitApplication(string exit)
         {
-            if (exit == "y" || exit == "Y") // Case Yes
+            if (exit.ToUpper() == "Y") // Case Yes
             {
                 UserInterface.WriteToConsole("\nGoodbye!");
                 Thread.Sleep(50); //Pause for 50ms before closing 
                 Environment.Exit(0);
             }
-            else if (exit == "n" || exit == "N") // Case No 
+            else if (exit.ToUpper() == "N") // Case No 
             {
                 UserInterface.WriteToConsole("Would you like to run the RTI database updater? y/n");
                 startApplication(UserInterface.ReadFromConsole());
@@ -117,12 +135,12 @@ namespace RTI.DataBase.Application.Controllers
                     fileFetcher.Pause();
                     UserInterface.WriteToConsole("\n\nDo you want to stop the current process? \nType s to stop or c to continue.");
                     string input = UserInterface.ReadFromConsole();
-                    if (input == "c" || input == "C")
+                    if (input.ToUpper() == "C")
                     {
                         fileFetcher.Resume();
                         return false; // Continue 
                     }
-                    else if (input == "s" || input == "S")
+                    else if (input.ToUpper() == "S")
                     {
                         return true; // Break the loop
                     }
