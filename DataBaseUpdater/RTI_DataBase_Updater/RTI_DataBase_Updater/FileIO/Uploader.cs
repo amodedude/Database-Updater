@@ -112,7 +112,8 @@ namespace RTI.DataBase.Application.FileIO
 
                     using (MySqlCommand cmd = new MySqlCommand(sCommand.ToString(), connection))
                     {
-                        date = (DateTime)cmd.ExecuteScalar();
+                        var result = cmd.ExecuteScalar();
+                        DateTime.TryParse(result.ToString(),out date);
                     }
                 }
                 return date;

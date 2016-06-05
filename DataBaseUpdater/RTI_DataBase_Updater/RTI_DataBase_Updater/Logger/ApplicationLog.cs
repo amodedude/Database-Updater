@@ -152,7 +152,7 @@ namespace RTI.DataBase.Application.Logger
 
         private static Uri GetFullFilePath()
         {
-            string LogFilePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            string LogFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             string fullpath = LogFilePath + "\\" + LogFileName;
             return new Uri(fullpath);
         }
