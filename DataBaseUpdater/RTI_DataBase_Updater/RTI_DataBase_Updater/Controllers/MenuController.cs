@@ -25,7 +25,7 @@ namespace RTI.DataBase.Application.Controllers
             if (start == "n" || start == "N") // Case No
             {
                 UserInterface.WriteToConsole("Do you want to exit?  y/n");
-                exitApplication(UserInterface.ReadFromConsole());
+                exitApplication(UserInterface.ReadFromConsole(true));
             }
             else if (start == "y" || start == "Y") // Case Yes
             {

@@ -47,7 +47,7 @@ namespace RTI.DataBase.Application.Controllers
             }
             else
             {
-                var input = Console.ReadKey();
+                var input = Console.ReadKey(true);
                 return input.KeyChar.ToString();
             }
         }

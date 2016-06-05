@@ -10,6 +10,7 @@ using RTI.DataBase.Application.Logger;
 using System.Threading;
 using System;
 using RTI.Database.Updater;
+using RTI.Database.Updater.Util;
 
 namespace RTI.DataBase.Application.FileIO
 {
@@ -122,7 +123,7 @@ namespace RTI.DataBase.Application.FileIO
             {
                 Debugger.Break();
                 ApplicationLog.WriteMessageToLog("ERROR: In RetrieveLatestDate(), There was an error retrieving data from the database.\n" + ex.Message, true, true, true);
-                RTI.Database.Updater.EmailService emailAlert= new Database.Updater.EmailService();
+                EmailService emailAlert= new EmailService();
                 List<string> address = new List<string>();
                 address.Add("amodedude@gmail.com");
                 emailAlert.SendMail(address, "RTI Alert Testing", "This is a test from the RTI database updater application.");

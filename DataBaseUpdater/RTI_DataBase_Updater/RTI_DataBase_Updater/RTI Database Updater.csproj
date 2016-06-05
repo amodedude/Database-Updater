@@ -98,7 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmailService.cs" />
+    <Compile Include="Util\Configuration.cs" />
+    <Compile Include="Util\EmailService.cs" />
     <Compile Include="Logger\ApplicationLog.cs" />
     <Compile Include="ApplicationStart.cs" />
     <Compile Include="FileIO\Uploader.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="source.cs">
       <DependentUpon>RTIDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Util\RTI_Timer.cs" />
     <Compile Include="water_data.cs">
       <DependentUpon>RTIDB.tt</DependentUpon>
     </Compile>

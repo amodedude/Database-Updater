@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 
-namespace RTI.Database.Updater
+namespace RTI.Database.Updater.Util
 {
     /// <summary>
     /// Sends email messages to recipients. 
